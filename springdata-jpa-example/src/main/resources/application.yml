@@ -4,6 +4,15 @@ spring:
     username: root
     password: 1qaz2wsx@
     driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
   jpa:
     hibernate:
       ddl-auto: create
+
+security:
+  oauth2:
+    resource:
+      token-info-uri: http://localhost:8282/oauth/check_token
+    client:
+      client-id: web
+      client-secret: webpass
