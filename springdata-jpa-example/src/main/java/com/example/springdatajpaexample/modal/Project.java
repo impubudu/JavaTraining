@@ -1,5 +1,7 @@
 package com.example.springdatajpaexample.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class Project {
     private String name;
 
     @ManyToMany(mappedBy = "projects")
+    @JsonIgnore
     private List<Student> students;
 
     public List<Student> getStudents() {

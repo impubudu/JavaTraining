@@ -28,11 +28,10 @@ INSERT INTO address (aid,city) VALUES (40004,'city5');
 INSERT INTO students_projects (sid,pid) VALUES (10000,30000);
 INSERT INTO students_projects (sid,pid) VALUES (10000,30001);
 INSERT INTO students_projects (sid,pid) VALUES (10001,30000);
-INSERT INTO students_projects (sid,pid) VALUES (10000,30000);
+INSERT INTO students_projects (sid,pid) VALUES (10003,30000);
 INSERT INTO students_projects (sid,pid) VALUES (10000,30002);
 INSERT INTO students_projects (sid,pid) VALUES (10004,30000);
-INSERT INTO students_projects (sid,pid) VALUES (10000,30000);
+INSERT INTO students_projects (sid,pid) VALUES (10002,30000);
 INSERT INTO students_projects (sid,pid) VALUES (10004,30004);
-INSERT INTO students_projects (sid,pid) VALUES (10000,30000);
-INSERT INTO students_projects (sid,pid) VALUES (10002,30003
-);
+INSERT INTO students_projects (sid,pid) VALUES (10000,30004);
+INSERT INTO students_projects (sid,pid) VALUES (10002,30003);
