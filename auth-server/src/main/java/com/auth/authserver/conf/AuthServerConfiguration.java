@@ -32,7 +32,7 @@ public class AuthServerConfiguration extends WebSecurityConfigurerAdapter implem
 
     @Override
     public void configure(ClientDetailsServiceConfigurer client) throws Exception {
-        client.inMemory().withClient("web").secret(passwordEncoder.encode("webpass")).scopes("READ","WRITE").authorizedGrantTypes("password","authorization_code");
+        client.inMemory().withClient("web").secret(passwordEncoder.encode("webpass")).scopes("READ","WRITE").authorizedGrantTypes("password","authorization_code").redirectUris("http://localhost:8090/login");
     }
 
     @Override
