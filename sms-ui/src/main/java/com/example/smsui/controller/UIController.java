@@ -23,8 +23,28 @@ public class UIController extends WebSecurityConfigurerAdapter{
 
 
     @RequestMapping(value = "/")
-    public String welcome(){
+    public String home(){
         return "index";
+    }
+
+    @RequestMapping(value = "/create")
+    public String create(){
+        return "create";
+    }
+
+    @RequestMapping(value = "/update")
+    public String update(){
+        return "update";
+    }
+
+    @RequestMapping(value = "/fetchone")
+    public String findOne(){
+        return "fetchById";
+    }
+
+    @RequestMapping(value = "/fetchall")
+    public String findAll(){
+        return "fetchAll";
     }
 
     @RequestMapping(value = "/report")

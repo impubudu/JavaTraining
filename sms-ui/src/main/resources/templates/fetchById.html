@@ -1,10 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .nav-buttons{
+        width:19% ;
+        }
+    </style>
 </head>
 <body>
+<div class="container ">
+    <div class="jumbotron" style="background-color:#00F3FF" align="center">
+        <h1>Student Management System</h1>
+    </div>
+    <div class="text-center nav-buttons-container">
 
+        <button type="button" onclick="location.href='http://localhost:8090/'" class="btn btn-success btn-lg nav-buttons">Home</button>
+        <button type="button" onclick="location.href='http://localhost:8090/create'" class="btn btn-success btn-lg nav-buttons">Create</button>
+        <button type="button" onclick="location.href='http://localhost:8090/update'" class="btn btn-success btn-lg nav-buttons">Update</button>
+        <button type="button" onclick="location.href='http://localhost:8090/fetchone'" class="btn btn-success btn-lg nav-buttons">Fetch One</button>
+        <button type="button" onclick="location.href='http://localhost:8090/fetchall'" class="btn btn-success btn-lg nav-buttons">Fetch All</button>
+
+
+
+
+        <!-- <button type="button" onclick="location.href='http://www.google.com'" class="btn btn-outline-success nav-buttons">Success</button>
+        <button type="button" onclick="location.href='http://www.google.com'" class="btn btn-outline-success nav-buttons">Success</button>
+        <button type="button" onclick="location.href='http://www.google.com'" class="btn btn-outline-success nav-buttons">Success</button>
+        <button type="button" onclick="location.href='http://www.google.com'" class="btn btn-outline-success nav-buttons">Success</button>
+     -->
+    </div>
+</div>
+<div><br></div>
+<div><br></div>
+<div class="container">
+    <form>
+        <div class="row" >
+            <div class="col-lg-4 col-md-8">
+                <div class="element-group">
+                    <div class="row">
+                        <div class="col" align="left">
+                            <label for="id">ID:</label>
+                        </div>
+                        <div class="col" align="right">
+                            <input type="text" class="form-control" id="id" name="id" >
+                        </div>
+                    </div>
+                    <div><br></div>
+                    <div><br></div>
+                    <div class="row" align="center">
+                        <div class="col" align="right">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
