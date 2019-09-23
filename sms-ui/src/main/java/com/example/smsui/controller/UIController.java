@@ -24,7 +24,7 @@ public class UIController extends WebSecurityConfigurerAdapter{
 
     @RequestMapping(value = "/")
     public String home(){
-        return "index";
+        return "home";
     }
 
     @RequestMapping(value = "/create")
@@ -37,19 +37,19 @@ public class UIController extends WebSecurityConfigurerAdapter{
         return "update";
     }
 
-    @RequestMapping(value = "/fetchone")
+    @RequestMapping(value = "/fetchById")
     public String findOne(){
         return "fetchById";
     }
 
-    @RequestMapping(value = "/fetchall")
+    @RequestMapping(value = "/fetchAll")
     public String findAll(){
         return "fetchAll";
     }
 
-    @RequestMapping(value = "/report")
-    public String welcomereport(){
-        return "home";
-    }
+//    @RequestMapping(value = "/report")
+//    public String welcomereport(){
+//        return "home";
+//    }
 
 }

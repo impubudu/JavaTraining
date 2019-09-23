@@ -16,8 +16,8 @@ INSERT INTO oauth_client_details (client_id, client_secret, web_server_redirect_
      (4,1), /* delete admin */
      (2,2),  /* read operator */
      (3,2);  /* update operator */
- INSERT INTO user (id, username,password, email, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked) VALUES ('1', 'pubudu','{bcrypt}$2a$10$LAlNQw7Qcu3xf1C2k6drw.NBeMP4uboRjsDGDKYPequuxXw.dGtCm', 'pubudu@pubudu.com', '1', '1', '1', '1');
- INSERT INTO user (id, username,password, email, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked) VALUES ('2', 'prasanna', '{bcrypt}$2a$10$iOZbI7Tz646iVNGWa03Y/.oviEvtCZRWl8wdSStAr7SgfvIF93DOW','prasanna@prasanna.com', '1', '1', '1', '1');
+ INSERT INTO user (id, username,password, email, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked) VALUES ('1', 'Pubudu','{bcrypt}$2a$10$LAlNQw7Qcu3xf1C2k6drw.NBeMP4uboRjsDGDKYPequuxXw.dGtCm', 'pubudu@pubudu.com', '1', '1', '1', '1');
+ INSERT INTO user (id, username,password, email, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked) VALUES ('2', 'Prasanna', '{bcrypt}$2a$10$iOZbI7Tz646iVNGWa03Y/.oviEvtCZRWl8wdSStAr7SgfvIF93DOW','prasanna@prasanna.com', '1', '1', '1', '1');
 
  INSERT INTO role_user (role_id, user_id)
     VALUES

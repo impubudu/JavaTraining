@@ -8,47 +8,176 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>-->
     <style>
-        .nav-buttons{
-        width:19% ;
-        }
-    </style>
+          * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+html,
+body {
+    background-color: #fff;
+    color: #555;
+    font-family: 'Lato', 'Arial', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+}
+
+.main {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+header{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),  url(../img/home.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    background-attachment: fixed;
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 500%;
+    word-spacing: 4px;
+    letter-spacing: 1px;
+}
+
+h2 {
+    margin-top: 25px;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 250%;
+    word-spacing: 4px;
+    letter-spacing: 1px;
+}
+
+h3 {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    margin-left: 40px;
+    color: #17a2b8;
+    font-size: 90%;
+    word-spacing: 4px;
+    letter-spacing: 1px;
+}
+
+.home {
+    position: absolute;
+    width: 1140px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 10px;
+}
+
+.main-nav {
+    float: left;
+    list-style: none;
+    margin-top: 40px;
+}
+
+.main-nav button {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.container-fluid{
+    background-color: rgb(41, 40, 40);
+    margin-bottom: 50px;
+}
+
+.element-group{
+    font-weight: 100;
+    font-size: 15px;
+}
+
+.form-control{
+    height: calc(1.0em + .5rem + 2px);;
+}
+
+.glyphicon{
+    top: 40px;
+    color: #17a2b8;
+}
+
+/* Style the search field */
+form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+}
+
+/* Style the submit button */
+form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+}
+
+form.example button:hover {
+    background: #0b7dda;
+}
+
+/* Clear floats */
+form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.search{
+    margin-top: auto;
+    font-size: 140%;
+}
+      </style>
 </head>
 <body>
-<div class="container ">
-    <div class="jumbotron" style="background-color:#00F3FF" align="center">
-        <h1>Student Management System</h1>
-    </div>
-    <div class="text-center nav-buttons-container">
-
-        <button type="button" onclick="location.href='http://localhost:8090/'" class="btn btn-success btn-lg nav-buttons">Home</button>
-        <button type="button" onclick="location.href='http://localhost:8090/create'" class="btn btn-success btn-lg nav-buttons">Create</button>
-        <button type="button" onclick="location.href='http://localhost:8090/update'" class="btn btn-success btn-lg nav-buttons">Update</button>
-        <button type="button" onclick="location.href='http://localhost:8090/fetchone'" class="btn btn-success btn-lg nav-buttons">Fetch One</button>
-        <button type="button" onclick="location.href='http://localhost:8090/fetchall'" class="btn btn-success btn-lg nav-buttons">Fetch All</button>
-
-
-
-
-        <!-- <button type="button" onclick="location.href='http://www.google.com'" class="btn btn-outline-success nav-buttons">Success</button>
-        <button type="button" onclick="location.href='http://www.google.com'" class="btn btn-outline-success nav-buttons">Success</button>
-        <button type="button" onclick="location.href='http://www.google.com'" class="btn btn-outline-success nav-buttons">Success</button>
-        <button type="button" onclick="location.href='http://www.google.com'" class="btn btn-outline-success nav-buttons">Success</button>
-     -->
-    </div>
+<div class="container-fluid">
+    <nav>
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="col-lg-6" sec:authorize="isAuthenticated()">
+                    <span class="glyphicon glyphicon-user "></span>
+                    <h3 sec:authentication="name"></h3>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h2>Student Management System</h2>
+            </div>
+            <div class="col-lg-4">
+                <ul class="main-nav">
+                    <button type="button" class="btn btn-outline-info btn-sm" onclick="location.href='http://localhost:8090'"><i class="fa fa-home"></i> Home</button>
+                    <button type="button" class="btn btn-outline-info btn-sm" onclick="location.href='http://localhost:8090/create'">Create</button>
+                    <button type="button" class="btn btn-outline-info btn-sm" onclick="location.href='http://localhost:8090/fetchAll'">FindALL</button>
+                    <button type="button" class="btn btn-outline-info btn-sm" onclick="location.href='http://localhost:8090/fetchById'">FindOne</button>
+                </ul>
+            </div>
+        </div>
+    </nav>
 </div>
-
-<div><br></div>
-<div><br></div>
-
-
 <div class="container">
     <form>
         <div class="row" >
-            <div class="col-lg-4 col-md-8">
+            <div class="col-lg-6 col-md-4">
                 <div class="element-group">
                     <div class="row">
                         <div class="col" align="left">
@@ -70,7 +199,7 @@
                     <div><br></div>
                     <div class="row">
                         <div class="col" align="left">
-                            <button data-toggle="collapse" data-target="#demo" type="button" class="btn btn-info"><span class="glyphicon glyphicon-plus-sign"></span></button>
+                            <button data-toggle="collapse" data-target="#demo" type="button" class="btn btn-info btn-sm"><i class="fa fa-arrow-down"></i></button>
                         </div>
                     </div>
                     <div><br></div>
@@ -109,7 +238,7 @@
                     </div>
                     <div class="row" align="center">
                         <div class="col" align="right">
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-info btn-sm">Submit</button>
                         </div>
                     </div>
 
@@ -118,6 +247,8 @@
         </div>
     </form>
 </div>
+
+
 
 
 
