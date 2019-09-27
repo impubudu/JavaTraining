@@ -1,10 +1,10 @@
 package com.example.springdatajpaexample.service;
 
-import com.example.springdatajpaexample.modal.Student;
-import com.example.springdatajpaexample.modal.Telephone;
+import com.example.springdatajpaexample.exception.StudentNotFoundException;
+import com.example.springdatajpaexample.model.Student;
+import com.example.springdatajpaexample.model.Telephone;
 import com.example.springdatajpaexample.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +30,9 @@ public class StudentServiceImpl {
 
     public Student getStudentById(Integer id){
         Optional<Student> optionalStudent = studentRepository.findById(id);
-        optionalStudent.orElseThrow(()-> new UsernameNotFoundException("student id is wrong"));
+        if(!optionalStudent.isPresent()){
+            throw new StudentNotFoundException("Student can't find.Id is wrong");
+        }
         return optionalStudent.get();
     }
 
