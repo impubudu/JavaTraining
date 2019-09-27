@@ -33,7 +33,7 @@ body {
 }
 
 header{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),  url(../img/home.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),  url(@̣{/img/home.jpg});
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -149,14 +149,14 @@ form.example::after {
 
   </head>
   <body>
-   <header>
+   <header >
      <nav>
        <div class="main">
           <ul class="main-nav">
-              <button type="button" class="btn btn-outline-info" onclick="location.href='http://localhost:8090/create'">Create</button>
-              <button type="button" class="btn btn-outline-info" onclick="location.href='http://localhost:8090/update'">Update</button>
-              <button type="button" class="btn btn-outline-info" onclick="location.href='http://localhost:8090/fetchAll'">FindALL</button>
-              <button type="button" class="btn btn-outline-info" onclick="location.href='http://localhost:8090/fetchById'">FindOne</button>
+              <button type="button" class="btn btn-outline-info" onclick="location.href='http://localhost:8090/create-student'">Create</button>
+              <button type="button" class="btn btn-outline-info" onclick="location.href='http://localhost:8090/update-student'">Update</button>
+              <button type="button" class="btn btn-outline-info" onclick="location.href='http://localhost:8090/fetch-all-students'">FindALL</button>
+              <button type="button" class="btn btn-outline-info" onclick="location.href='http://localhost:8090/fetch-one-student'">FindOne</button>
           </ul>
        </div>
      </nav>

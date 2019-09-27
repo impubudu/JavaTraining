@@ -14,7 +14,7 @@ public class UIController extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().
-                antMatchers("/").
+                antMatchers("/","/img/**","/css/**").
                 permitAll().
                 anyRequest().
                 authenticated();
@@ -27,29 +27,24 @@ public class UIController extends WebSecurityConfigurerAdapter{
         return "home";
     }
 
-    @RequestMapping(value = "/create")
+    @RequestMapping(value = "/create-student")
     public String create(){
         return "create";
     }
 
-    @RequestMapping(value = "/update")
+    @RequestMapping(value = "/update-student")
     public String update(){
         return "update";
     }
 
-    @RequestMapping(value = "/fetchById")
+    @RequestMapping(value = "/fetch-one-student")
     public String findOne(){
         return "fetchById";
     }
 
-    @RequestMapping(value = "/fetchAll")
+    @RequestMapping(value = "/fetch-all-students")
     public String findAll(){
         return "fetchAll";
     }
-
-//    @RequestMapping(value = "/report")
-//    public String welcomereport(){
-//        return "home";
-//    }
 
 }
