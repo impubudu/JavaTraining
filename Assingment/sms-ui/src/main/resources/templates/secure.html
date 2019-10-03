@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form name="customers-form" th:action="@{/profiles}" th:formmethod="post">
+        <button type="submit" class="btn btn-primary">Profiles</button>
+    </form>
+    <div th:unless="${error==null}">
+        <table class="table">
+            <thead>
+            <td>status code</td>
+            <td>error</td>
+            </thead>
+            <tbody>
+
+            <td><span th:text="${error.statusCode}"></span></td>
+            <td><span th:text="${error.body}"></span></td>
+
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${error==null}">
+        <table class="table">
+            <thead>
+                <td>First Name</td>
+                <td>Last Name</td>
+            </thead>
+            <tbody>
+            <tr th:each="student:${students}">
+                <td><span th:text="${student.sid}"></span></td>
+                <td><span th:text="${student.name}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
