@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+      .container-fluid{
+        background-color: lavender;
+    }
+    .navbar{
+        margin-bottom: 0%;
+    }
+    .navbar-inverse .navbar-brand:hover {
+        color: aqua;
+    }
+    .navbar-inverse .navbar-brand {
+    color: aqua;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: aqua;
+}
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+    color: aqua;
+    background-color: transparent;
+}
+body{background-color: lavender}
+.glyphicon-user:before {
+    padding-right: 6px;
+}
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">EMS</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/employees}">Employees</a></li>
+      <li><a th:href="@{/projects}">Projects</a></li>
+      <li><a th:href="@{/tasks}">Tasks</a></li>
+      <li sec:authorize="hasRole('ROLE_manager')"><a href="#">Operations</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a><span class="glyphicon glyphicon-user" sec:authentication="name"></span></a></li>
+    </ul>
+</nav>
+  
+<div class="container-fluid">
+        <h3>Basic Navbar Example</h3>
+        <p>A navigation bar is a navigation header that is placed at the top of the page.</p>
+        <p>The navbar-expand-xl|lg|md|sm class determines when the navbar should stack vertically (on extra large, large, medium or small screens).</p>
+      </div>
+
+</body>
+</html>

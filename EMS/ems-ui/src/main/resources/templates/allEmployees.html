@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+      .container-fluid{
+        background-color: lavender;
+    }
+    .navbar{
+        margin-bottom: 0%;
+    }
+    .navbar-inverse .navbar-brand:hover {
+        color: aqua;
+    }
+    .navbar-inverse .navbar-brand {
+    color: aqua;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: aqua;
+}
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+    color: aqua;
+    background-color: transparent;
+}
+body{background-color: lavender}
+.glyphicon-user:before {
+    padding-right: 6px;
+}
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">EMS</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li sec:authorize="hasRole('ROLE_manager')"><a th:href="@{/create-employee}">Create</a></li>
+        <li><a><span class="glyphicon glyphicon-user" sec:authentication="name"></span></a></li>
+    </ul>
+  
+</nav>
+  
+<div >
+        <table class="table">
+            <thead>
+                <td>ID</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>Email</td>
+                <td>Action</td>
+            </thead>
+            <tbody>
+            <tr th:each="employee:${employees}">
+                <td><span th:text="${employee.id}"></span></td>
+                <td><span th:text="${employee.firstName}"></span></td>
+                <td><span th:text="${employee.lastName}"></span></td>
+                <td><span th:text="${employee.email}"></span></td>
+                <td><button type="button" class="btn btn-primary">View</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

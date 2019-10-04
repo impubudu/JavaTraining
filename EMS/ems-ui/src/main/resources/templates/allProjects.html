@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+      .container-fluid{
+        background-color: lavender;
+    }
+    .navbar{
+        margin-bottom: 0%;
+    }
+    .navbar-inverse .navbar-brand:hover {
+        color: aqua;
+    }
+    .navbar-inverse .navbar-brand {
+    color: aqua;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: aqua;
+}
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+    color: aqua;
+    background-color: transparent;
+}
+body{background-color: lavender}
+.glyphicon-user:before {
+    padding-right: 6px;
+}
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">EMS</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+        <li sec:authorize="hasRole('ROLE_manager')"><a th:href="@{/create-project}">Create</a></li>
+        <li><a><span class="glyphicon glyphicon-user" sec:authentication="name"></span></a></li>
+    </ul>
+
+</nav>
+
+<div >
+    <table class="table">
+        <thead>
+        <td>ID</td>
+        <td>Project Name</td>
+        <td>Start Date</td>
+        <td>End Date</td>
+        </thead>
+        <tbody>
+        <tr th:each="project:${projects}">
+            <td><span th:text="${project.id}"></span></td>
+            <td><span th:text="${project.name}"></span></td>
+            <td><span th:text="${project.startDate}"></span></td>
+            <td><span th:text="${project.endDate}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

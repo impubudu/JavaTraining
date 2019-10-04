@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+        .container-fluid{
+          background-color: lavender;
+      }
+      .navbar{
+          margin-bottom: 0%;
+      }
+      .navbar-inverse .navbar-brand:hover {
+          color: aqua;
+      }
+      .navbar-inverse .navbar-brand {
+      color: aqua;
+  }
+  .navbar-inverse .navbar-nav>li>a {
+      color: aqua;
+  }
+  .navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+      color: aqua;
+      background-color: transparent;
+  }
+  body{background-color: lavender}
+
+  .form-box{
+    width: fit-content;
+    margin-top: 30px;
+  }
+    </style>
+</head>
+<body>
+        <nav class="navbar navbar-inverse">
+  
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#">EMS</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a><span class="glyphicon glyphicon-user"></span> Pubudu</a></li>
+                </ul>
+              
+            </nav>
+<div class="container">
+    <form name='f' th:object="${employee}" method='POST'>
+        <select class="box_shadow info_dropdown" name="selectCountry" <b>th:field="*{countries}" >
+        <option th:each="sopt:${countries}" th:value="?" th:text="?">Countries</option>
+        </select>
+    </form>
+</div>
+<!--<div class="container">-->
+<!--        <form name='f' th:object="${personForm}" method='POST'>-->
+<!--                <table>-->
+<!--                    <tr>-->
+<!--                        <td>Select Country:</td>-->
+<!--                        <td>-->
+<!--                            <select th:field="*{countryId}">-->
+<!--                                 <option value=""> &#45;&#45; </option>-->
+<!--                                 <option th:each="country : ${countries}"-->
+<!--                                    th:value="${country.countryId}"-->
+<!--                                    th:utext="${country.countryName}"/>-->
+<!--                          </select>-->
+<!--         -->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                 -->
+<!--                    <tr>-->
+<!--                        <td><input name="submit" type="submit" value="submit" /></td>-->
+<!--                    </tr>-->
+<!--                </table>-->
+<!--            </form>-->
+
+
+<!--</div>-->
+
+<!--<div>-->
+<!--        <ul>-->
+<!--           <li th:each="item : ${selectableUsers}">-->
+<!--             <input type="checkbox" th:field="*{users}" th:value="${item}" />-->
+<!--             <label th:for="${#ids.prev('users')}" th:text="${item}"></label>-->
+<!--          </li>-->
+<!--       </ul>-->
+<!--    </div>-->
+
+</body>
+</html>
