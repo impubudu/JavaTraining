@@ -1,9 +1,6 @@
 package com.example.employeeservice.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Employee {
@@ -17,6 +14,9 @@ public class Employee {
     private String lastName;
 
     private String Email;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private AssignTask assignTask;
 
     public Integer getId() {
         return id;
@@ -48,5 +48,24 @@ public class Employee {
 
     public void setEmail(String email) {
         Email = email;
+    }
+
+    public AssignTask getAssignTask() {
+        return assignTask;
+    }
+
+    public void setAssignTask(AssignTask assignTask) {
+        this.assignTask = assignTask;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", Email='" + Email + '\'' +
+                ", assignTask=" + assignTask +
+                '}';
     }
 }

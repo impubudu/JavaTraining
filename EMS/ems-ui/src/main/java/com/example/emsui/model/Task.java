@@ -31,4 +31,13 @@ public class Task {
     public void setDescription(String description) {
         Description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", Description='" + Description + '\'' +
+                '}';
+    }
 }

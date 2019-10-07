@@ -3,10 +3,8 @@ package com.example.Projectservice.controller;
 import com.example.Projectservice.model.Project;
 import com.example.Projectservice.service.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,12 +15,20 @@ public class ProjectController {
     ProjectServiceImpl projectService;
 
     @RequestMapping(value = "/projects")
+    @PreAuthorize("hasAuthority('read_profile')")
     public List<Project> getProjects(){
         return projectService.getProjects();
     }
 
     @RequestMapping(value = "/projects",method = RequestMethod.POST)
+    @PreAuthorize("hasAnyAuthority('write_profile')")
     public Project save(@RequestBody Project project){
         return projectService.save(project);
+    }
+
+    @RequestMapping(value = "/projects/{ids}",method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('read_profile')")
+    public List<Project> getTask(@PathVariable List<Integer> ids){
+        return projectService.getProjectsList(ids);
     }
 }

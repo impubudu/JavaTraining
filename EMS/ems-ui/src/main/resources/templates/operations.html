@@ -8,85 +8,95 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <style>
-        .container-fluid{
-          background-color: lavender;
-      }
-      .navbar{
-          margin-bottom: 0%;
-      }
-      .navbar-inverse .navbar-brand:hover {
-          color: aqua;
-      }
-      .navbar-inverse .navbar-brand {
-      color: aqua;
-  }
-  .navbar-inverse .navbar-nav>li>a {
-      color: aqua;
-  }
-  .navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
-      color: aqua;
-      background-color: transparent;
-  }
-  body{background-color: lavender}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <style>
+        .col-sm-10 {
+            margin-bottom: 27px;
+        }
+        ul, li {
+            margin-left: 10PX;
+        }
 
-  .form-box{
-    width: fit-content;
-    margin-top: 30px;
-  }
+        .wrap-table100 {
+            width: 750px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-left: 115px;
+            margin-top: 84px;
+        }
     </style>
 </head>
 <body>
         <nav class="navbar navbar-inverse">
-  
+            <ul class="nav navbar-nav navbar-left">
+                <button type="reset" class="btn btn-info pull-left" onclick="goBack()"><span class="glyphicon glyphicon-chevron-left "></span></button>
+                <li><a th:href="@{/welcome}"> <i class="fa fa-home"></i> Home</a></li>
+            </ul>
                 <div class="navbar-header">
-                  <a class="navbar-brand" href="#">EMS</a>
+                  <a class="navbar-brand">EMS</a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                   <li><a><span class="glyphicon glyphicon-user"></span> Pubudu</a></li>
                 </ul>
               
             </nav>
-<div class="container">
-    <form name='f' th:object="${employee}" method='POST'>
-        <select class="box_shadow info_dropdown" name="selectCountry" <b>th:field="*{countries}" >
-        <option th:each="sopt:${countries}" th:value="?" th:text="?">Countries</option>
-        </select>
-    </form>
-</div>
-<!--<div class="container">-->
-<!--        <form name='f' th:object="${personForm}" method='POST'>-->
-<!--                <table>-->
-<!--                    <tr>-->
-<!--                        <td>Select Country:</td>-->
-<!--                        <td>-->
-<!--                            <select th:field="*{countryId}">-->
-<!--                                 <option value=""> &#45;&#45; </option>-->
-<!--                                 <option th:each="country : ${countries}"-->
-<!--                                    th:value="${country.countryId}"-->
-<!--                                    th:utext="${country.countryName}"/>-->
-<!--                          </select>-->
-<!--         -->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                 -->
-<!--                    <tr>-->
-<!--                        <td><input name="submit" type="submit" value="submit" /></td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-<!--            </form>-->
+        <div class="container">
+            <div class="wrap-table100">
+            <div class="form-box">
+                <form name='task-form' th:action="@{/assign}" method='POST'>
+                    <div class="form-group">
+                        <label  class="control-label col-lg-2" for="id">Employee:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="id" name="eid">
+                                <option selected>Select Employee</option>
+                                <option th:each="employee : ${employees}"
+                                        th:value="${employee.id}"
+                                        th:utext="${employee.firstName}"/>
+                            </select>
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <label  class="control-label col-lg-2" for="projectName">Project:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="projectName" name="pid">
+                                <option selected>Select Project</option>
+                                <option th:each="project : ${projects}"
+                                        th:value="${project.id}"
+                                        th:utext="${project.name}"/>
+                            </select>
+                        </div>
+                    </div>
 
-<!--</div>-->
+                    <div class="form-group">
+                        <label  class="control-label col-lg-2" for="taskName">Select Tasks:</label>
+                        <div class="col-sm-10">
+                            <ul id="taskName">
+                                <li th:each="task : ${tasks}">
+                                    <div class="ui checkbox">
+                                        <input type="checkbox" th:value="${task.id}" name="tid"/>
+                                        <label th:text="${task.name}"></label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button type="reset" class="btn btn-danger pull-left">Cancel</button>
+                            <button type="submit" class="btn btn-success pull-right">Submit</button>
+                        </div>
+                    </div>
 
-<!--<div>-->
-<!--        <ul>-->
-<!--           <li th:each="item : ${selectableUsers}">-->
-<!--             <input type="checkbox" th:field="*{users}" th:value="${item}" />-->
-<!--             <label th:for="${#ids.prev('users')}" th:text="${item}"></label>-->
-<!--          </li>-->
-<!--       </ul>-->
-<!--    </div>-->
-
+                </form>
+            </div>
+            </div>
+        </div>
 </body>
 </html>

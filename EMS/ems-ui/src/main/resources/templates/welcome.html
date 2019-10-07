@@ -8,56 +8,40 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/stylewelcome.css}"/>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
   <style>
-      .container-fluid{
-        background-color: lavender;
-    }
-    .navbar{
-        margin-bottom: 0%;
-    }
-    .navbar-inverse .navbar-brand:hover {
-        color: aqua;
-    }
-    .navbar-inverse .navbar-brand {
-    color: aqua;
-}
-.navbar-inverse .navbar-nav>li>a {
-    color: aqua;
-}
-.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
-    color: aqua;
-    background-color: transparent;
-}
-body{background-color: lavender}
-.glyphicon-user:before {
-    padding-right: 6px;
-}
+
   </style>
 </head>
 <body>
+<header>
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <a class="navbar-brand" >EMS</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a th:href="@{/}"> <i class="fa fa-home"></i> Home</a></li>
+            <li><a th:href="@{/employees}">Employees</a></li>
+            <li><a th:href="@{/projects}">Projects</a></li>
+            <li><a th:href="@{/tasks}">Tasks</a></li>
+            <li sec:authorize="hasRole('ROLE_manager')"><a th:href="@{/operations}">Operations</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a><span class="glyphicon glyphicon-user" sec:authentication="name"></span></a></li>
+        </ul>
+    </nav>
 
-<nav class="navbar navbar-inverse">
-  
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">EMS</a>
+    <div class="home">
+        <h2>Welcome to Employee Management System</h2>
     </div>
-    <ul class="nav navbar-nav">
-      <li><a th:href="@{/}">Home</a></li>
-      <li><a th:href="@{/employees}">Employees</a></li>
-      <li><a th:href="@{/projects}">Projects</a></li>
-      <li><a th:href="@{/tasks}">Tasks</a></li>
-      <li sec:authorize="hasRole('ROLE_manager')"><a href="#">Operations</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a><span class="glyphicon glyphicon-user" sec:authentication="name"></span></a></li>
-    </ul>
-</nav>
-  
-<div class="container-fluid">
-        <h3>Basic Navbar Example</h3>
-        <p>A navigation bar is a navigation header that is placed at the top of the page.</p>
-        <p>The navbar-expand-xl|lg|md|sm class determines when the navbar should stack vertically (on extra large, large, medium or small screens).</p>
-      </div>
+</header>
+
 
 </body>
 </html>

@@ -8,38 +8,45 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
     <style>
-      .container-fluid{
-        background-color: lavender;
-    }
-    .navbar{
-        margin-bottom: 0%;
-    }
-    .navbar-inverse .navbar-brand:hover {
-        color: aqua;
-    }
-    .navbar-inverse .navbar-brand {
-    color: aqua;
-}
-.navbar-inverse .navbar-nav>li>a {
-    color: aqua;
-}
-.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
-    color: aqua;
-    background-color: transparent;
-}
-body{background-color: lavender}
-.glyphicon-user:before {
-    padding-right: 6px;
-}
-  </style>
+        .row .cell:nth-child(1) {
+            width: 274px;
+            padding-left: 40px;
+        }
+
+        .row .cell:nth-child(2) {
+            width: 267px;
+        }
+
+        .row .cell:nth-child(3) {
+            width: 250px;
+        }
+
+        .row .cell:nth-child(4) {
+            width: 190px;
+        }
+
+        .thead:hover{
+            background-color: #6c7ae0;
+        }
+    </style>
 </head>
 <body>
 
 <nav class="navbar navbar-inverse">
-
+    <ul class="nav navbar-nav navbar-left">
+        <button type="reset" class="btn btn-info pull-left" onclick="goBack()"><span class="glyphicon glyphicon-chevron-left "></span></button>
+        <li><a th:href="@{/welcome}"> <i class="fa fa-home"></i> Home</a></li>
+    </ul>
     <div class="navbar-header">
-        <a class="navbar-brand" href="#">EMS</a>
+        <a class="navbar-brand">EMS</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
         <li sec:authorize="hasRole('ROLE_manager')"><a th:href="@{/create-task}">Create</a></li>
@@ -47,23 +54,40 @@ body{background-color: lavender}
     </ul>
 
 </nav>
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table">
 
-<div >
-    <table class="table">
-        <thead>
-        <td>ID</td>
-        <td>Task Name</td>
-        <td>Description</td>
-        </thead>
-        <tbody>
-        <tr th:each="task:${tasks}">
-            <td><span th:text="${task.id}"></span></td>
-            <td><span th:text="${task.name}"></span></td>
-            <td><span th:text="${task.description}"></span></td>
-        </tr>
-        </tbody>
-    </table>
+                <div class="row header thead">
+                    <div class="cell">
+                        ID
+                    </div>
+                    <div class="cell">
+                        Name
+                    </div>
+                    <div class="cell">
+                        Description
+                    </div>
+                </div>
+
+                <div class="row" th:each="task:${tasks}">
+                    <div class="cell" data-title="id">
+                        <span th:text="${task.id}"></span>
+                    </div>
+                    <div class="cell" data-title="name">
+                        <span th:text="${task.name}"></span>
+                    </div>
+                    <div class="cell" data-title="description">
+                        <span th:text="${task.description}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+</body>
 
 </body>
 </html>

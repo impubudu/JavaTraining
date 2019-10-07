@@ -6,3 +6,9 @@ INSERT INTO employee (email,first_name,last_name) VALUES
 ('impubudu5@gmail.com','pubudu5','prasanna5');
 
 
+-- INSERT INTO assign_task (id,eid,pid,tid) VALUES
+-- (1,1,1,'1,2,3'),
+-- (2,1,2,'3,5'),
+-- (3,1,3,'4');
+
+

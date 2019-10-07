@@ -9,41 +9,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <style>
-      .navbar-brand{ width: 1000px;
-    text-align: center;
-    font-size: 2.25rem;}
-    a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover{
-        color: azure;
-    }
-    a:not([href]):not([tabindex]){
-        color: azure;
-    }
-
-    .container-fluid{
-        
-        background-color: lavender;
-    }
-
-    body{background-color: lavender}
-     
-  </style>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/stylehome.css}"/>
 </head>
 <body>
-
-    <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand">Employee Managment System</a>
-        <ul class="nav navbar-nav navbar-right">
-            <a class="btn btn-primary" th:href="@{/welcome}" role="button">More</a>
-        </ul>
-    </nav>
-
-
-    <div class="container-fluid">
-        <h3>Basic Navbar Example</h3>
-        <p>A navigation bar is a navigation header that is placed at the top of the page.</p>
-        <p>The navbar-expand-xl|lg|md|sm class determines when the navbar should stack vertically (on extra large, large, medium or small screens).</p>
+<header>
+    <div class="home">
+        <h1>Employee Managment System</h1>
     </div>
-<!--    <img src="https://avatars3.githubusercontent.com/u/34265465?s=400&v=4"></img>-->
+
+    <a class="btn btn-dark" th:href="@{'/welcome'}" role="button">More</a>
+</header>
 </body>
 </html>

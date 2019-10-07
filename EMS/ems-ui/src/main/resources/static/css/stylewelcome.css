@@ -1,0 +1,65 @@
+.navbar-right {
+    margin-right: -7px;
+}
+.btn {
+    margin-top: 7px;
+    margin-left: 6px;
+}
+
+.btn-info {
+    color: #78c1ff;
+    background-color: #181e20;
+    border-color: #46b8da;
+}
+.container-fluid{
+    background-color: lavender;
+}
+.navbar{
+    margin-bottom: 0%;
+}
+.navbar-inverse .navbar-brand:hover {
+    color: aqua;
+}
+.navbar-inverse .navbar-brand {
+    color: aqua;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: aqua;
+}
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+    color: aqua;
+    background-color: transparent;
+}
+header{
+    background-image: linear-gradient(rgba(57, 162, 202, 0.8), rgba(67, 246, 255, 0.8)), url(../img/employee.png);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    background-attachment: fixed;
+}
+.home {
+    position: absolute;
+    width: 1140px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 10px;
+}
+.glyphicon-user:before {
+    padding-right: 6px;
+}
+body {
+    background-color: #fff;
+    color: #555;
+    font-family: 'Lato', 'Arial', sans-serif;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+}
+.h2, h2 {
+    font-size: 80px;
+    color: aliceblue;
+}
+
+.bg-dark {
+    background-color: #a8d3ff!important;
+}
