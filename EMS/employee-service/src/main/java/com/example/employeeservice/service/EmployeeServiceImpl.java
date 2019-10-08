@@ -56,8 +56,8 @@ public class EmployeeServiceImpl {
         return optionalStudent.get();
     }
 
-    public AssignTask saveAssignTask(AssignTask assignTask){
-        return assignTaskRepostory.save(assignTask);
+    public List<AssignTask> saveAssignTask(List<AssignTask> assignTasks){
+        return assignTaskRepostory.saveAll(assignTasks);
     }
 
     public List<Project> getProjects(Integer eid){
@@ -74,12 +74,12 @@ public class EmployeeServiceImpl {
     }
 
     public List<Task> getTasks(Integer pid){
-        AssignTask assignTask = assignTaskRepostory.findByPid(pid);
-
+        List<AssignTask> assignTasks = assignTaskRepostory.findByPid(pid);
+        String taskIds = assignTasks.stream().map(s->String.valueOf(s.getTid())).collect(Collectors.joining(","));
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", AccessTokenConfigurer.getToken());
         HttpEntity<Task> taskHttpEntity = new HttpEntity<Task>(httpHeaders);
-        ResponseEntity<List> responseEntity = restTemplate.exchange("http://localhost:8082/ems/tasks/{ids}", HttpMethod.GET, taskHttpEntity, List.class, assignTask.getTid());
+        ResponseEntity<List> responseEntity = restTemplate.exchange("http://localhost:8082/ems/tasks/{ids}", HttpMethod.GET, taskHttpEntity, List.class, taskIds);
 
         return responseEntity.getBody();
 

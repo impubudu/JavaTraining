@@ -49,7 +49,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/assign",method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_manager')")
-    public AssignTask saveAssignTask(@RequestBody AssignTask assignTask){
-        return employeeService.saveAssignTask(assignTask);
+    public List<AssignTask> saveAssignTask(@RequestBody List<AssignTask> assignTasks){
+        return employeeService.saveAssignTask(assignTasks);
     }
 }

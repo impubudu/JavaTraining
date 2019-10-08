@@ -7,7 +7,7 @@ public class AssignTask {
 
     private Integer pid;
 
-    private String tid;
+    private Integer tid;
 
     public Integer getEid() {
         return eid;
@@ -33,11 +33,11 @@ public class AssignTask {
         this.pid = pid;
     }
 
-    public String getTid() {
+    public Integer getTid() {
         return tid;
     }
 
-    public void setTid(String tid) {
+    public void setTid(Integer tid) {
         this.tid = tid;
     }
 

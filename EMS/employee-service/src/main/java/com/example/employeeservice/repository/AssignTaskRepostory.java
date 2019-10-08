@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface AssignTaskRepostory extends JpaRepository<AssignTask,Integer> {
     List<AssignTask> findByEid(Integer eid);
-    AssignTask findByPid(Integer pid);
+    List<AssignTask> findByPid(Integer pid);
 }

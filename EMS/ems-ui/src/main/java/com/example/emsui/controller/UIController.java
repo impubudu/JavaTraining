@@ -1,9 +1,6 @@
 package com.example.emsui.controller;
 
-import com.example.emsui.model.AssignTask;
-import com.example.emsui.model.Employee;
-import com.example.emsui.model.Project;
-import com.example.emsui.model.Task;
+import com.example.emsui.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
@@ -187,12 +184,21 @@ public class UIController extends WebSecurityConfigurerAdapter{
     }
 
     @RequestMapping(value = "/assign",method = RequestMethod.POST)
-    public String assignProject(@ModelAttribute AssignTask assignTask,Model model){
+    public String assignProject(@ModelAttribute AssignTaskList assignTaskList, Model model){
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", AccessTokenConfigurer.getToken());
-        HttpEntity<AssignTask> assignTaskHttpEntity = new HttpEntity<AssignTask>(assignTask,httpHeaders);
+        List<AssignTask> assignTask = new ArrayList<>();
+        assignTaskList.getTid().forEach((t)->{
+            AssignTask task = new AssignTask();
+            task.setEid(assignTaskList.getEid());
+            task.setPid(assignTaskList.getPid());
+            task.setTid(t);
+            assignTask.add(task);
+        });
+
+        HttpEntity<List> assignTaskHttpEntity = new HttpEntity<List>(assignTask,httpHeaders);
         try {
-            ResponseEntity<AssignTask> responseEntity = restTemplate.exchange("http://localhost:8080/ems/assign", HttpMethod.POST,assignTaskHttpEntity,AssignTask.class);
+            ResponseEntity<List> responseEntity = restTemplate.exchange("http://localhost:8080/ems/assign", HttpMethod.POST,assignTaskHttpEntity,List.class);
         }catch (HttpStatusCodeException se){
             ResponseEntity responseEntity = ResponseEntity.status(se.getRawStatusCode()).headers(se.getResponseHeaders()).body(se.getResponseBodyAsString());
             model.addAttribute("error",responseEntity);

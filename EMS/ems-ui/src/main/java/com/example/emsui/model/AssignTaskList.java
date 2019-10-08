@@ -1,22 +1,15 @@
-package com.example.employeeservice.model;
+package com.example.emsui.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.List;
 
-@Entity
-public class AssignTask {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AssignTaskList {
     private Integer id;
 
     private Integer eid;
 
     private Integer pid;
 
-    private Integer tid;
+    private List<Integer> tid;
 
     public Integer getEid() {
         return eid;
@@ -42,11 +35,11 @@ public class AssignTask {
         this.pid = pid;
     }
 
-    public Integer getTid() {
+    public List<Integer> getTid() {
         return tid;
     }
 
-    public void setTid(Integer tid) {
+    public void setTid(List<Integer> tid) {
         this.tid = tid;
     }
 
