@@ -1,4 +1,4 @@
-package com.example.employeeservice.service;
+package com.example.employeeservice.config;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;

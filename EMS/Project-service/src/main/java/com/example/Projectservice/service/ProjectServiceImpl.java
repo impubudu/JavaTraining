@@ -4,6 +4,8 @@ import com.example.Projectservice.exception.ProjectNotFoundException;
 import com.example.Projectservice.model.Project;
 import com.example.Projectservice.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +18,10 @@ public class ProjectServiceImpl {
 
     public List<Project> getProjects(){
         return projectRepository.findAll();
+    }
+
+    public Page<Project> getProjectsPage(Pageable pageable) {
+        return projectRepository.findAll(pageable);
     }
 
     public Project save(Project project){

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <title>Bootstrap Example</title>
+    <title>Employee Management System</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -16,6 +16,10 @@
         }
     </script>
     <style>
+       .disabled{
+        display:none !important;
+        }
+
         .row .cell:nth-child(1) {
             width: 214px;
             padding-left: 87px;
@@ -76,7 +80,7 @@
                     </div>
                 </div>
 
-                <div class="row" th:each="employee:${employees}">
+                <div class="row" th:each="employee : ${employees}">
                     <div class="cell" data-title="id">
                         <span th:text="${employee.id}"></span>
                     </div>
@@ -94,6 +98,35 @@
                     </div>
                 </div>
             </div>
+            <nav aria-label="Pagination" th:if="${employeesPage.totalPages gt 0}">
+                <ul class="pagination justify-content-center font-weight-medium">
+                    <li class="page-item" th:classappend="${employeesPage.number eq 0} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/employees?page={id}(id=${employeesPage.number lt 2 ? 1 : employeesPage.number})}"
+                           aria-label="Previous" title="Previous Page" data-toggle="tooltip">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" th:classappend="${i eq employeesPage.number + 1} ? 'active'"
+                        th:each="i : ${#numbers.sequence( employeesPage.number + 1, employeesPage.totalPages > 10 + employeesPage.number ? employeesPage.number + 10 : employeesPage.totalPages, 1)}">
+                        <a class="page-link" th:href="@{/employees?page={id}(id=${i})}" th:text="${i}"
+                           th:title="${'Page '+ i}"
+                           rel="tooltip"></a>
+                    </li>
+                    <li class="page-item disabled" th:if="${employeesPage.number + 10 < employeesPage.totalPages}">
+                        <a class="page-link svg-icon" href="#">
+                            <span aria-hidden="true">&hellip;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" th:classappend="${employeesPage.number + 1 eq employeesPage.totalPages} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/employees?page={id}(id=${employeesPage.number + 2})}"
+                           aria-label="Next" title="Next Page" data-toggle="tooltip">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 package com.example.emsui.controller;
 
+import com.example.emsui.config.AccessTokenConfigurer;
 import com.example.emsui.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
@@ -12,16 +13,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -56,13 +55,14 @@ public class UIController extends WebSecurityConfigurerAdapter{
     }
 
     @RequestMapping(value = "/employees")
-    public String getEmployees(Model model){
+    public String getEmployees(Model model, @RequestParam("page") Optional<Integer> page){
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", AccessTokenConfigurer.getToken());
         HttpEntity<Employee> employeeHttpEntity = new HttpEntity<Employee>(httpHeaders);
         try {
-            ResponseEntity<Employee[]> responseEntity = restTemplate.exchange("http://localhost:8080/ems/employees", HttpMethod.GET,employeeHttpEntity,Employee[].class);
-            model.addAttribute("employees",responseEntity.getBody());
+            ResponseEntity<HashMap> responseEntity = restTemplate.exchange("http://localhost:8080/ems/employees-page?page={page}", HttpMethod.GET,employeeHttpEntity,HashMap.class,page.isPresent()?page.get():1);
+            model.addAttribute("employees",responseEntity.getBody().get("content"));
+            model.addAttribute("employeesPage",responseEntity.getBody());
         }catch (HttpStatusCodeException se){
             ResponseEntity responseEntity = ResponseEntity.status(se.getRawStatusCode()).headers(se.getResponseHeaders()).body(se.getResponseBodyAsString());
             model.addAttribute("error",responseEntity);
@@ -92,13 +92,14 @@ public class UIController extends WebSecurityConfigurerAdapter{
     }
 
     @RequestMapping(value = "/projects")
-    public String getProjects(Model model){
+    public String getProjects(Model model,@RequestParam("page") Optional<Integer> page){
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", AccessTokenConfigurer.getToken());
         HttpEntity<Project> projectHttpEntity = new HttpEntity<Project>(httpHeaders);
         try {
-            ResponseEntity<Project[]> responseEntity = restTemplate.exchange("http://localhost:8081/ems/projects", HttpMethod.GET,projectHttpEntity,Project[].class);
-            model.addAttribute("projects",responseEntity.getBody());
+            ResponseEntity<HashMap> responseEntity = restTemplate.exchange("http://localhost:8081/ems/projects-page?page={page}", HttpMethod.GET,projectHttpEntity,HashMap.class,page.isPresent()?page.get():1);
+            model.addAttribute("projects",responseEntity.getBody().get("content"));
+            model.addAttribute("projectsPage",responseEntity.getBody());
         }catch (HttpStatusCodeException se){
             ResponseEntity responseEntity = ResponseEntity.status(se.getRawStatusCode()).headers(se.getResponseHeaders()).body(se.getResponseBodyAsString());
             model.addAttribute("error",responseEntity);
@@ -128,13 +129,14 @@ public class UIController extends WebSecurityConfigurerAdapter{
     }
 
     @RequestMapping(value = "/tasks")
-    public String getTasks(Model model){
+    public String getTasks(Model model,@RequestParam("page") Optional<Integer> page){
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", AccessTokenConfigurer.getToken());
         HttpEntity<Task> taskHttpEntity = new HttpEntity<Task>(httpHeaders);
         try {
-            ResponseEntity<Task[]> responseEntity = restTemplate.exchange("http://localhost:8082/ems/tasks", HttpMethod.GET,taskHttpEntity,Task[].class);
-            model.addAttribute("tasks",responseEntity.getBody());
+            ResponseEntity<HashMap> responseEntity = restTemplate.exchange("http://localhost:8082/ems/tasks-page?page={page}", HttpMethod.GET,taskHttpEntity,HashMap.class,page.isPresent()?page.get():1);
+            model.addAttribute("tasks",responseEntity.getBody().get("content"));
+            model.addAttribute("tasksPage",responseEntity.getBody());
         }catch (HttpStatusCodeException se){
             ResponseEntity responseEntity = ResponseEntity.status(se.getRawStatusCode()).headers(se.getResponseHeaders()).body(se.getResponseBodyAsString());
             model.addAttribute("error",responseEntity);
@@ -190,9 +192,11 @@ public class UIController extends WebSecurityConfigurerAdapter{
         List<AssignTask> assignTask = new ArrayList<>();
         assignTaskList.getTid().forEach((t)->{
             AssignTask task = new AssignTask();
-            task.setEid(assignTaskList.getEid());
-            task.setPid(assignTaskList.getPid());
-            task.setTid(t);
+            AssignTask.ComposeKey composeKey = new AssignTask.ComposeKey();
+            composeKey.setEid(assignTaskList.getEid());
+            composeKey.setPid(assignTaskList.getPid());
+            composeKey.setTid(t);
+            task.setComposeKey(composeKey);
             assignTask.add(task);
         });
 

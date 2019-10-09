@@ -4,6 +4,8 @@ import com.example.Taskservice.exception.TaskNotFoundException;
 import com.example.Taskservice.model.Task;
 import com.example.Taskservice.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,10 @@ public class TaskServiceImpl {
 
     public List<Task> getTasks(){
         return taskRepository.findAll();
+    }
+
+    public Page<Task> getTasksPage(Pageable pageable) {
+        return taskRepository.findAll(pageable);
     }
 
     public Task getTask(Integer id){
