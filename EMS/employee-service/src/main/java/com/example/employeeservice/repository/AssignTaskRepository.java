@@ -1,6 +1,6 @@
 package com.example.employeeservice.repository;
 
-import com.example.employeeservice.model.AssignTask;
+import com.impubudu.emscloud.commons.model.AssignTask;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

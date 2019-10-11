@@ -38,6 +38,9 @@
         .thead:hover{
             background-color: #6c7ae0;
         }
+        .logout{
+            margin-right:15px;
+        }
     </style>
 </head>
 <body>
@@ -45,14 +48,23 @@
 <nav class="navbar navbar-inverse">
     <ul class="nav navbar-nav navbar-left">
         <button type="reset" class="btn btn-info pull-left" onclick="goBack()"><span class="glyphicon glyphicon-chevron-left "></span></button>
-        <li><a th:href="@{/welcome}"> <i class="fa fa-home"></i> Home</a></li>
     </ul>
     <div class="navbar-header">
         <a class="navbar-brand">EMS</a>
     </div>
+    <ul class="nav navbar-nav">
+        <li><a th:href="@{/welcome}"> <i class="fa fa-home"></i> Home</a></li>
+        <li><a th:href="@{/employees}">Employees</a></li>
+        <li><a th:href="@{/projects}">Projects</a></li>
+        <li><a th:href="@{/tasks}">Tasks</a></li>
+        <li sec:authorize="hasRole('ROLE_manager')"><a th:href="@{/create-operation}">Operations</a></li>
+    </ul>
     <ul class="nav navbar-nav navbar-right">
         <li sec:authorize="hasRole('ROLE_manager')"><a th:href="@{/create-project}">Create</a></li>
         <li><a><span class="glyphicon glyphicon-user" sec:authentication="name"></span></a></li>
+        <li><form class="logout" th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </form></li>
     </ul>
 
 </nav>
@@ -74,6 +86,9 @@
                     <div class="cell">
                         End Date
                     </div>
+                    <div class="cell">
+                        Status
+                    </div>
                 </div>
 
                 <div class="row" th:each="project:${projects}">
@@ -89,6 +104,9 @@
                     <div class="cell" data-title="end Date">
                         <span th:text="${project.endDate}"></span>
                     </div>
+                    <div class="cell" data-title="status">
+                        <span th:text="${project.status}"></span>
+                    </div>
                 </div>
             </div>
             <nav aria-label="Pagination" th:if="${projectsPage.totalPages gt 0}">
@@ -100,8 +118,14 @@
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
+<!--                    <li class="page-item" th:classappend="${i eq projectsPage.number + 1} ? 'active'"-->
+<!--                        th:each="i : ${#numbers.sequence( projectsPage.number + 1, projectsPage.totalPages > 10 + projectsPage.number ? projectsPage.number + 10 : projectsPage.totalPages, 1)}">-->
+<!--                        <a class="page-link" th:href="@{/projects?page={id}(id=${i})}" th:text="${i}"-->
+<!--                           th:title="${'Page '+ i}"-->
+<!--                           rel="tooltip"></a>-->
+<!--                    </li>-->
                     <li class="page-item" th:classappend="${i eq projectsPage.number + 1} ? 'active'"
-                        th:each="i : ${#numbers.sequence( projectsPage.number + 1, projectsPage.totalPages > 10 + projectsPage.number ? projectsPage.number + 10 : projectsPage.totalPages, 1)}">
+                        th:each="i : ${#numbers.sequence( 1, projectsPage.totalPages,1)}">
                         <a class="page-link" th:href="@{/projects?page={id}(id=${i})}" th:text="${i}"
                            th:title="${'Page '+ i}"
                            rel="tooltip"></a>

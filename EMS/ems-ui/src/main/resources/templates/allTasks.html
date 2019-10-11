@@ -21,16 +21,16 @@
         }
 
         .row .cell:nth-child(1) {
-            width: 274px;
+            width: 156px;
             padding-left: 40px;
         }
 
         .row .cell:nth-child(2) {
-            width: 267px;
+            width: 133px;
         }
 
         .row .cell:nth-child(3) {
-            width: 250px;
+            width: 210px;
         }
 
         .row .cell:nth-child(4) {
@@ -40,6 +40,9 @@
         .thead:hover{
             background-color: #6c7ae0;
         }
+        .logout{
+            margin-right:15px;
+        }
     </style>
 </head>
 <body>
@@ -47,14 +50,23 @@
 <nav class="navbar navbar-inverse">
     <ul class="nav navbar-nav navbar-left">
         <button type="reset" class="btn btn-info pull-left" onclick="goBack()"><span class="glyphicon glyphicon-chevron-left "></span></button>
-        <li><a th:href="@{/welcome}"> <i class="fa fa-home"></i> Home</a></li>
     </ul>
     <div class="navbar-header">
         <a class="navbar-brand">EMS</a>
     </div>
+    <ul class="nav navbar-nav">
+        <li><a th:href="@{/welcome}"> <i class="fa fa-home"></i> Home</a></li>
+        <li><a th:href="@{/employees}">Employees</a></li>
+        <li><a th:href="@{/projects}">Projects</a></li>
+        <li><a th:href="@{/tasks}">Tasks</a></li>
+        <li sec:authorize="hasRole('ROLE_manager')"><a th:href="@{/create-operation}">Operations</a></li>
+    </ul>
     <ul class="nav navbar-nav navbar-right">
         <li sec:authorize="hasRole('ROLE_manager')"><a th:href="@{/create-task}">Create</a></li>
         <li><a><span class="glyphicon glyphicon-user" sec:authentication="name"></span></a></li>
+        <li><form class="logout" th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </form></li>
     </ul>
 
 </nav>
@@ -73,6 +85,15 @@
                     <div class="cell">
                         Description
                     </div>
+                    <div class="cell">
+                        Start Date
+                    </div>
+                    <div class="cell">
+                        End Date
+                    </div>
+                    <div class="cell">
+                        Status
+                    </div>
                 </div>
 
                 <div class="row" th:each="task:${tasks}">
@@ -85,6 +106,15 @@
                     <div class="cell" data-title="description">
                         <span th:text="${task.description}"></span>
                     </div>
+                    <div class="cell" data-title="start date">
+                        <span th:text="${task.startDate}"></span>
+                    </div>
+                    <div class="cell" data-title="end Date">
+                        <span th:text="${task.endDate}"></span>
+                    </div>
+                    <div class="cell" data-title="status">
+                        <span th:text="${task.status}"></span>
+                    </div>
                 </div>
             </div>
             <nav aria-label="Pagination" th:if="${tasksPage.totalPages gt 0}">
@@ -96,8 +126,14 @@
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
+<!--                    <li class="page-item" th:classappend="${i eq tasksPage.number + 1} ? 'active'"-->
+<!--                        th:each="i : ${#numbers.sequence( tasksPage.number + 1, tasksPage.totalPages > 10 + tasksPage.number ? tasksPage.number + 10 : tasksPage.totalPages, 1)}">-->
+<!--                        <a class="page-link" th:href="@{/tasks?page={id}(id=${i})}" th:text="${i}"-->
+<!--                           th:title="${'Page '+ i}"-->
+<!--                           rel="tooltip"></a>-->
+<!--                    </li>-->
                     <li class="page-item" th:classappend="${i eq tasksPage.number + 1} ? 'active'"
-                        th:each="i : ${#numbers.sequence( tasksPage.number + 1, tasksPage.totalPages > 10 + tasksPage.number ? tasksPage.number + 10 : tasksPage.totalPages, 1)}">
+                        th:each="i : ${#numbers.sequence( 1, tasksPage.totalPages , 1)}">
                         <a class="page-link" th:href="@{/tasks?page={id}(id=${i})}" th:text="${i}"
                            th:title="${'Page '+ i}"
                            rel="tooltip"></a>

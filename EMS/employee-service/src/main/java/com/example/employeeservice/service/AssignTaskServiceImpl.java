@@ -1,10 +1,10 @@
 package com.example.employeeservice.service;
 
 import com.example.employeeservice.config.AccessTokenConfigurer;
-import com.example.employeeservice.model.AssignTask;
-import com.example.employeeservice.model.Project;
-import com.example.employeeservice.model.Task;
 import com.example.employeeservice.repository.AssignTaskRepository;
+import com.impubudu.emscloud.commons.model.AssignTask;
+import com.impubudu.emscloud.commons.model.Project;
+import com.impubudu.emscloud.commons.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AssignTaskServiceImpl {
+public class AssignTaskServiceImpl implements AssignTaskService{
     @Autowired
     AssignTaskRepository assignTaskRepository;
 
@@ -44,7 +44,7 @@ public class AssignTaskServiceImpl {
         HttpEntity<Project> projectHttpEntity = new HttpEntity<Project>(httpHeaders);
 
         if(!projectIds.equals("")){
-            ResponseEntity<List> responseEntity = restTemplate.exchange("http://localhost:8081/ems/projects/{ids}", HttpMethod.GET, projectHttpEntity, List.class, projectIds);
+            ResponseEntity<List> responseEntity = restTemplate.exchange("http://project-service:8081/ems/projects/{ids}", HttpMethod.GET, projectHttpEntity, List.class, projectIds);
             return responseEntity.getBody();
         }
 
@@ -58,7 +58,7 @@ public class AssignTaskServiceImpl {
         httpHeaders.add("Authorization", AccessTokenConfigurer.getToken());
         HttpEntity<Task> taskHttpEntity = new HttpEntity<Task>(httpHeaders);
         if(!taskIds.equals("")) {
-            ResponseEntity<List> responseEntity = restTemplate.exchange("http://localhost:8082/ems/tasks/{ids}", HttpMethod.GET, taskHttpEntity, List.class, taskIds);
+            ResponseEntity<List> responseEntity = restTemplate.exchange("http://task-service:8082/ems/tasks/{ids}", HttpMethod.GET, taskHttpEntity, List.class, taskIds);
             return responseEntity.getBody();
         }
         return null;

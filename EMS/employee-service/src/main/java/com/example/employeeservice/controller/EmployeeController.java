@@ -1,11 +1,11 @@
 package com.example.employeeservice.controller;
 
-import com.example.employeeservice.model.AssignTask;
-import com.example.employeeservice.model.Employee;
-import com.example.employeeservice.model.Project;
-import com.example.employeeservice.model.Task;
 import com.example.employeeservice.service.AssignTaskServiceImpl;
 import com.example.employeeservice.service.EmployeeServiceImpl;
+import com.impubudu.emscloud.commons.model.AssignTask;
+import com.impubudu.emscloud.commons.model.Employee;
+import com.impubudu.emscloud.commons.model.Project;
+import com.impubudu.emscloud.commons.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

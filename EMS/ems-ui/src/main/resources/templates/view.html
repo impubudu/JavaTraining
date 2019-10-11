@@ -20,6 +20,12 @@
             text-align: center;
             margin: 30px;
         }
+        .logout{
+            margin-right:15px;
+        }
+        .row .cell:nth-child(4) {
+            width: 194px;
+        }
     </style>
 </head>
 <body>
@@ -27,13 +33,22 @@
 <nav class="navbar navbar-inverse">
     <ul class="nav navbar-nav navbar-left">
         <button type="reset" class="btn btn-info pull-left" onclick="goBack()"><span class="glyphicon glyphicon-chevron-left "></span></button>
-        <li><a th:href="@{/welcome}"> <i class="fa fa-home"></i> Home</a></li>
     </ul>
     <div class="navbar-header">
         <a class="navbar-brand">EMS</a>
     </div>
+    <ul class="nav navbar-nav">
+        <li><a th:href="@{/welcome}"> <i class="fa fa-home"></i> Home</a></li>
+        <li><a th:href="@{/employees}">Employees</a></li>
+        <li><a th:href="@{/projects}">Projects</a></li>
+        <li><a th:href="@{/tasks}">Tasks</a></li>
+        <li sec:authorize="hasRole('ROLE_manager')"><a th:href="@{/create-operation}">Operations</a></li>
+    </ul>
     <ul class="nav navbar-nav navbar-right">
         <li><a><span class="glyphicon glyphicon-user" sec:authentication="name"></span></a></li>
+        <li><form class="logout" th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </form></li>
     </ul>
 
 </nav>
@@ -56,6 +71,9 @@
                     <div class="cell">
                         Email
                     </div>
+                    <div class="cell">
+                        Phone No
+                    </div>
                 </div>
                 <div class="row">
                     <div class="cell" data-title="id">
@@ -69,6 +87,9 @@
                     </div>
                     <div class="cell" data-title="email">
                         <span th:text="${employee.email}"></span>
+                    </div>
+                    <div class="cell" data-title="phoneNumber">
+                        <span th:text="${employee.phoneNumber}"></span>
                     </div>
                 </div>
             </div>
@@ -89,6 +110,9 @@
                         End Date
                     </div>
                     <div class="cell">
+                        Status
+                    </div>
+                    <div class="cell">
                         Tasks
                     </div>
                 </div>
@@ -105,6 +129,9 @@
                     </div>
                     <div class="cell" data-title="end Date">
                         <span th:text="${project.endDate}"></span>
+                    </div>
+                    <div class="cell" data-title="status">
+                        <span th:text="${project.status}"></span>
                     </div>
                     <div class="cell" data-title="tasks">
                         <a class="btn btn-primary" th:href="@{'/employees/' + ${employee.id}+'/projects/'+${project.id}+'/tasks'}" role="button" >View</a>

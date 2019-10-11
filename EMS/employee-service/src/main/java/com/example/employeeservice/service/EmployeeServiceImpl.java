@@ -1,30 +1,20 @@
 package com.example.employeeservice.service;
 
-import com.example.employeeservice.config.AccessTokenConfigurer;
 import com.example.employeeservice.exception.EmployeeNotFoundException;
-import com.example.employeeservice.model.AssignTask;
-import com.example.employeeservice.model.Employee;
-import com.example.employeeservice.model.Project;
-import com.example.employeeservice.model.Task;
-import com.example.employeeservice.repository.AssignTaskRepository;
 import com.example.employeeservice.repository.EmployeeRepository;
+import com.impubudu.emscloud.commons.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
-public class EmployeeServiceImpl {
+public class EmployeeServiceImpl implements EmployeeService{
     @Autowired
     EmployeeRepository employeeRepository;
 

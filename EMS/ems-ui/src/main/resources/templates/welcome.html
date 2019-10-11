@@ -16,7 +16,9 @@
         }
     </script>
   <style>
-
+    .logout{
+        margin-right:15px;
+    }
   </style>
 </head>
 <body>
@@ -30,10 +32,14 @@
             <li><a th:href="@{/employees}">Employees</a></li>
             <li><a th:href="@{/projects}">Projects</a></li>
             <li><a th:href="@{/tasks}">Tasks</a></li>
-            <li sec:authorize="hasRole('ROLE_manager')"><a th:href="@{/operations}">Operations</a></li>
+            <li sec:authorize="hasRole('ROLE_manager')"><a th:href="@{/create-operation}">Operations</a></li>
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a><span class="glyphicon glyphicon-user" sec:authentication="name"></span></a></li>
+            <li><form class="logout" th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-primary">Logout</button>
+            </form></li>
         </ul>
     </nav>
 

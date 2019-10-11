@@ -13,7 +13,9 @@ public class Employee {
 
     private String lastName;
 
-    private String Email;
+    private String email;
+
+    private Integer phoneNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
     private AssignTask assignTask;
@@ -43,11 +45,19 @@ public class Employee {
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
+    }
+
+    public Integer getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(Integer phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public AssignTask getAssignTask() {
@@ -64,7 +74,8 @@ public class Employee {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", Email='" + Email + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber=" + phoneNumber +
                 ", assignTask=" + assignTask +
                 '}';
     }
