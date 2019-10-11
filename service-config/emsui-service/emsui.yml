@@ -4,7 +4,7 @@ security:
       client-id: web
       client-secret: webpass
       user-authorization-uri: http://localhost:8282/oauth/authorize
-      access-token-uri: http://localhost:8282/oauth/token
+      access-token-uri: http://oauth2-service:8282/oauth/token
     resource:
       token-info-uri: http://oauth2-service:8282/oauth/check_token
 server:
