@@ -1,11 +1,11 @@
 package com.example.employeeservice.controller;
 
-import com.example.employeeservice.service.AssignTaskServiceImpl;
+import com.example.employeeservice.service.AssignedOperationServiceImpl;
 import com.example.employeeservice.service.EmployeeServiceImpl;
-import com.impubudu.emscloud.commons.model.AssignTask;
-import com.impubudu.emscloud.commons.model.Employee;
-import com.impubudu.emscloud.commons.model.Project;
-import com.impubudu.emscloud.commons.model.Task;
+import com.impubudu.emscloud.commons.model.employee.AssignedOperation;
+import com.impubudu.emscloud.commons.model.employee.Employee;
+import com.impubudu.emscloud.commons.model.project.Project;
+import com.impubudu.emscloud.commons.model.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +22,7 @@ public class EmployeeController {
     EmployeeServiceImpl employeeService;
 
     @Autowired
-    AssignTaskServiceImpl assignTaskService;
+    AssignedOperationServiceImpl assignTaskService;
 
     @RequestMapping(value = "/employees")
     @PreAuthorize("hasAuthority('read_profile')")
@@ -63,9 +63,9 @@ public class EmployeeController {
         return assignTaskService.getTasks(eid,pid);
     }
 
-    @RequestMapping(value = "/assign",method = RequestMethod.POST)
+    @RequestMapping(value = "/assignedOperation",method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_manager')")
-    public List<AssignTask> saveAssignTask(@RequestBody List<AssignTask> assignTasks){
-        return assignTaskService.saveAssignTask(assignTasks);
+    public List<AssignedOperation> saveAssignTask(@RequestBody List<AssignedOperation> assignTasks){
+        return assignTaskService.saveAssignedOperation(assignTasks);
     }
 }

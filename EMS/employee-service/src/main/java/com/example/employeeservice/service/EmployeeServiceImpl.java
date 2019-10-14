@@ -2,7 +2,7 @@ package com.example.employeeservice.service;
 
 import com.example.employeeservice.exception.EmployeeNotFoundException;
 import com.example.employeeservice.repository.EmployeeRepository;
-import com.impubudu.emscloud.commons.model.Employee;
+import com.impubudu.emscloud.commons.model.employee.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;

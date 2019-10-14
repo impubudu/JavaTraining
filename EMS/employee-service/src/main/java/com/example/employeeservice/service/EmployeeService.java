@@ -1,6 +1,6 @@
 package com.example.employeeservice.service;
 
-import com.impubudu.emscloud.commons.model.Employee;
+import com.impubudu.emscloud.commons.model.employee.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

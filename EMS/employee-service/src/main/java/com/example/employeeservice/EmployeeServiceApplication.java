@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @SpringBootApplication
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@EntityScan(basePackages = "com.impubudu.emscloud.commons.model")
+@EntityScan(basePackages = "com.impubudu.emscloud.commons.model.employee")
 public class EmployeeServiceApplication {
 
 	public static void main(String[] args) {

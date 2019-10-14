@@ -2,10 +2,10 @@ package com.example.emsui.controller;
 
 import com.example.emsui.config.AccessTokenConfigurer;
 import com.example.emsui.model.*;
-import com.impubudu.emscloud.commons.model.AssignTask;
-import com.impubudu.emscloud.commons.model.Employee;
-import com.impubudu.emscloud.commons.model.Project;
-import com.impubudu.emscloud.commons.model.Task;
+import com.impubudu.emscloud.commons.model.employee.AssignedOperation;
+import com.impubudu.emscloud.commons.model.employee.Employee;
+import com.impubudu.emscloud.commons.model.project.Project;
+import com.impubudu.emscloud.commons.model.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
@@ -194,24 +194,24 @@ public class UIController extends WebSecurityConfigurerAdapter{
         return "createOperation";
     }
 
-    @RequestMapping(value = "/assign",method = RequestMethod.POST)
-    public String assignProject(@ModelAttribute AssignTaskList assignTaskList, Model model){
+    @RequestMapping(value = "/assignedOperation",method = RequestMethod.POST)
+    public String assignProject(@ModelAttribute AssignedOperationList assignedOperationList, Model model){
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", AccessTokenConfigurer.getToken());
-        List<AssignTask> assignTask = new ArrayList<>();
-        assignTaskList.getTid().forEach((t)->{
-            AssignTask task = new AssignTask();
-            AssignTask.ComposeKey composeKey = new AssignTask.ComposeKey();
-            composeKey.setEid(assignTaskList.getEid());
-            composeKey.setPid(assignTaskList.getPid());
+        List<AssignedOperation> assignedOperations = new ArrayList<>();
+        assignedOperationList.getTid().forEach((t)->{
+            AssignedOperation operation = new AssignedOperation();
+            AssignedOperation.OperationCompositeKey composeKey = new AssignedOperation.OperationCompositeKey();
+            composeKey.setEid(assignedOperationList.getEid());
+            composeKey.setPid(assignedOperationList.getPid());
             composeKey.setTid(t);
-            task.setComposeKey(composeKey);
-            assignTask.add(task);
+            operation.setOperationCompositeKey(composeKey);
+            assignedOperations.add(operation);
         });
 
-        HttpEntity<List> assignTaskHttpEntity = new HttpEntity<List>(assignTask,httpHeaders);
+        HttpEntity<List> assignTaskHttpEntity = new HttpEntity<List>(assignedOperations,httpHeaders);
         try {
-            ResponseEntity<List> responseEntity = restTemplate.exchange("http://employee-service:8080/ems/assign", HttpMethod.POST,assignTaskHttpEntity,List.class);
+            ResponseEntity<AssignedOperation[]> responseEntity = restTemplate.exchange("http://employee-service:8080/ems/assignedOperation", HttpMethod.POST,assignTaskHttpEntity,AssignedOperation[].class);
         }catch (HttpStatusCodeException se){
             ResponseEntity responseEntity = ResponseEntity.status(se.getRawStatusCode()).headers(se.getResponseHeaders()).body(se.getResponseBodyAsString());
             model.addAttribute("error",responseEntity);
