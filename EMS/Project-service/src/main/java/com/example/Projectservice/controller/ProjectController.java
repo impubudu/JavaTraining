@@ -1,7 +1,7 @@
 package com.example.Projectservice.controller;
 
 import com.example.Projectservice.service.ProjectServiceImpl;
-import com.impubudu.emscloud.commons.model.Project;
+import com.impubudu.emscloud.commons.model.project.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

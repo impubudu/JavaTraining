@@ -2,7 +2,7 @@ package com.example.Taskservice.service;
 
 import com.example.Taskservice.exception.TaskNotFoundException;
 import com.example.Taskservice.repository.TaskRepository;
-import com.impubudu.emscloud.commons.model.Task;
+import com.impubudu.emscloud.commons.model.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

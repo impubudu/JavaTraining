@@ -2,7 +2,7 @@ package com.example.Projectservice.service;
 
 import com.example.Projectservice.exception.ProjectNotFoundException;
 import com.example.Projectservice.repository.ProjectRepository;
-import com.impubudu.emscloud.commons.model.Project;
+import com.impubudu.emscloud.commons.model.project.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

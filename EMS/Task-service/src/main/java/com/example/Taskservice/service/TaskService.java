@@ -1,6 +1,6 @@
 package com.example.Taskservice.service;
 
-import com.impubudu.emscloud.commons.model.Task;
+import com.impubudu.emscloud.commons.model.task.Task;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
