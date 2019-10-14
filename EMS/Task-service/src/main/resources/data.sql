@@ -1,14 +1,14 @@
-INSERT INTO task (name,description) VALUES
-('task1','description1'),
-('task2','description2'),
-('task3','description3'),
-('task4','description4'),
-('task5','description5'),
-('task6','description6'),
-('task7','description7'),
-('task8','description8'),
-('task9','description9'),
-('task10','description10');
+INSERT INTO task (name,description,start_date,end_date,status) VALUES
+('task1','description1','2019-08-02','2019-11-02','Active'),
+('task2','description2','2019-08-02','2019-11-02','Active'),
+('task3','description3','2019-08-02','2019-11-02','Cancelled'),
+('task4','description4','2019-08-02','2019-11-02','Active'),
+('task5','description5','2019-08-02','2019-11-02','Active'),
+('task6','description6','2019-08-02','2019-11-02','Active'),
+('task7','description7','2019-08-02','2019-11-02','Finished'),
+('task8','description8','2019-08-02','2019-11-02','Active'),
+('task9','description9','2019-08-02','2019-11-02','Active'),
+('task10','description10','2019-08-02','2019-11-02','Finished');
 --('task11','description11'),
 --('task12','description12'),
 --('task13','description13'),

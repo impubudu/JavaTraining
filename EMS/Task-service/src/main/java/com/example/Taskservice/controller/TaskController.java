@@ -1,8 +1,8 @@
 package com.example.Taskservice.controller;
 
 
-import com.example.Taskservice.model.Task;
 import com.example.Taskservice.service.TaskServiceImpl;
+import com.impubudu.emscloud.commons.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

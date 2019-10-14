@@ -1,7 +1,7 @@
 package com.example.Projectservice.controller;
 
-import com.example.Projectservice.model.Project;
 import com.example.Projectservice.service.ProjectServiceImpl;
+import com.impubudu.emscloud.commons.model.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,7 +26,7 @@ public class ProjectController {
     @RequestMapping(value = "/projects-page")
     @PreAuthorize("hasAuthority('read_profile')")
     public Page<Project> getProjectsPage(@RequestParam("page") Optional<Integer> page,
-                                           @RequestParam("size") Optional<Integer> size){
+                                         @RequestParam("size") Optional<Integer> size){
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(5);
         return projectService.getProjectsPage(PageRequest.of(currentPage - 1, pageSize));

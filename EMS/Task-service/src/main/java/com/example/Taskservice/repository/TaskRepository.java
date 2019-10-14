@@ -1,6 +1,6 @@
 package com.example.Taskservice.repository;
 
-import com.example.Taskservice.model.Task;
+import com.impubudu.emscloud.commons.model.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

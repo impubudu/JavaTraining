@@ -20,7 +20,7 @@ logging:
 security:
   oauth2:
     resource:
-      token-info-uri: http://oauth2-service:8282/oauth/check_token
+      token-info-uri: http://localhost:8282/oauth/check_token
     client:
       client-id: web
       client-secret: webpass
