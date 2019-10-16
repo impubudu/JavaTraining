@@ -30,14 +30,14 @@ public class AssignedOperationServiceImpl implements AssignedOperationService {
         return new RestTemplate();
     }
 
-    public List<AssignedOperation> saveAssignedOperation(List<AssignedOperation> assignTasks){
-        return assignedOperationRepository.saveAll(assignTasks);
+    public List<AssignedOperation> saveAssignedOperation(List<AssignedOperation> assignedOperations){
+        return assignedOperationRepository.saveAll(assignedOperations);
     }
 
     public List<Project> getProjects(Integer eid){
-        List<AssignedOperation> assignTasks = assignedOperationRepository.findByOperationCompositeKey_Eid(eid);
+        List<AssignedOperation> assignedOperations = assignedOperationRepository.findByOperationCompositeKey_Eid(eid);
 
-        String projectIds = assignTasks.stream().map(s->String.valueOf(s.getOperationCompositeKey().getPid())).collect(Collectors.joining(","));
+        String projectIds = assignedOperations.stream().map(s->String.valueOf(s.getOperationCompositeKey().getPid())).collect(Collectors.joining(","));
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", AccessTokenConfigurer.getToken());
@@ -52,8 +52,8 @@ public class AssignedOperationServiceImpl implements AssignedOperationService {
     }
 
     public List<Task> getTasks(Integer eid, Integer pid){
-        List<AssignedOperation> assignTasks = assignedOperationRepository.findByOperationCompositeKey_EidAndOperationCompositeKey_Pid(eid,pid);
-        String taskIds = assignTasks.stream().map(s->String.valueOf(s.getOperationCompositeKey().getTid())).collect(Collectors.joining(","));
+        List<AssignedOperation> assignedOperations = assignedOperationRepository.findByOperationCompositeKey_EidAndOperationCompositeKey_Pid(eid,pid);
+        String taskIds = assignedOperations.stream().map(s->String.valueOf(s.getOperationCompositeKey().getTid())).collect(Collectors.joining(","));
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", AccessTokenConfigurer.getToken());
         HttpEntity<Task> taskHttpEntity = new HttpEntity<Task>(httpHeaders);

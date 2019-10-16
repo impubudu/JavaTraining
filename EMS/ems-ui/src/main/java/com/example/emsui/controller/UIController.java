@@ -262,8 +262,10 @@ public class UIController extends WebSecurityConfigurerAdapter{
         HttpEntity<Employee> employeeHttpEntity = new HttpEntity<Employee>(httpHeaders);
 
         try {
-            ResponseEntity<Task[]> responseEntity = restTemplate.exchange("http://employee-service:8080/ems/employees/{eid}/projects/{pid}/tasks", HttpMethod.GET,employeeHttpEntity,Task[].class,eid,pid);
-            model.addAttribute("tasks",responseEntity.getBody());
+            ResponseEntity<Project[]> responseEntity1 = restTemplate.exchange("http://localhost:8081/ems/projects/{pid}", HttpMethod.GET,employeeHttpEntity,Project[].class,pid);
+            model.addAttribute("project",responseEntity1.getBody()[0]);
+            ResponseEntity<Task[]> responseEntity2 = restTemplate.exchange("http://localhost:8080/ems/employees/{eid}/projects/{pid}/tasks", HttpMethod.GET,employeeHttpEntity,Task[].class,eid,pid);
+            model.addAttribute("tasks",responseEntity2.getBody());
         }catch (HttpStatusCodeException se){
             ResponseEntity responseEntity = ResponseEntity.status(se.getRawStatusCode()).headers(se.getResponseHeaders()).body(se.getResponseBodyAsString());
             model.addAttribute("error",responseEntity);
