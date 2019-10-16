@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Employee Management System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <style>
+        button, input, select, textarea {
+
+            font-size: 42px;
+
+        }
+        .button5 {
+            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+            position: absolute;
+            top: 440px;
+            left: 1150px;
+        }
+        .disabled{
+            display:none !important;
+        }
+
+        .row .cell:nth-child(1) {
+            width: 267px;
+        }
+
+        .row .cell:nth-child(2) {
+            width: 211px;
+        }
+
+        .row .cell:nth-child(3) {
+            width: 179px;
+        }
+
+        .row .cell:nth-child(4) {
+            width: 129px;
+        }
+        .thead:hover{
+            background-color: #6c7ae0;
+        }
+        .logout{
+            margin-right:15px;
+        }
+        body {
+
+            background-size: cover;
+        }
+
+        *[role="form"] {
+            max-width: 530px;
+            padding: 15px;
+            margin: 0 auto;
+            border-radius: 0.3em;
+            background-color: #f2f2f2;
+        }
+
+        *[role="form"] h2 {
+            font-family: 'Open Sans' , sans-serif;
+            font-size: 35px;
+            font-weight: 600;
+            color: #000761;
+            margin-top: 5%;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+        .modal-content{
+            background-color: #c1e9ff;
+            /* width: 302px; */
+            height: 650px;
+        }
+        .modal-body{
+            height: 600px;
+        }
+        .form-horizontal{
+            height: 547px;
+        }
+        .form-group{
+            margin-top: 36px;
+            margin-bottom: 35px;
+        }
+        .login {
+            font-family: 'Josefin Sans', sans-serif;
+            -webkit-transition: .3s;
+            -moz-transition: .3s;
+            transition: .3s;
+            -webkit-transform: rotateY(40deg);
+            -moz-transform: rotateY(40deg);
+            transform: rotateY(40deg);
+        }
+        .login:hover {
+            -webkit-transform: rotate(0);
+            -moz-transform: rotate(0);
+            transform: rotate(0);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <ul class="nav navbar-nav navbar-left">
+            <button type="reset" class="btn btn-info pull-left" onclick="goBack()"><span class="glyphicon glyphicon-chevron-left "></span></button>
+        </ul>
+        <div class="navbar-header">
+            <a class="navbar-brand">EMS</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a th:href="@{/welcome}"> <i class="fa fa-home"></i> Home</a></li>
+            <li><a th:href="@{/employees}">Employees</a></li>
+            <li><a th:href="@{/projects}">Projects</a></li>
+            <li><a th:href="@{/tasks}">Tasks</a></li>
+            <li sec:authorize="hasRole('ROLE_manager')"><a th:href="@{/create-operation}">Operations</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+            <!--<li sec:authorize="hasRole('ROLE_manager')"><a  data-toggle="modal" data-target="#myModal">Create</a></li>-->
+            <li><a><span class="glyphicon glyphicon-user" sec:authentication="name"></span></a></li>
+            <li><form class="logout" th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-primary">Logout</button>
+            </form></li>
+        </ul>
+
+    </nav>
+    <header>
+    <div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <div class="table">
+
+                    <div class="row header thead">
+                        <div class="cell">
+                            ID
+                        </div>
+                        <div class="cell">
+                            Name
+                        </div>
+                        <div class="cell">
+                            Start Date
+                        </div>
+                        <div class="cell">
+                            End Date
+                        </div>
+                        <div class="cell">
+                            Status
+                        </div>
+                    </div>
+
+                    <div class="row" th:each="project:${projects}">
+                        <div class="cell" data-title="id">
+                            <span th:text="${project.id}"></span>
+                        </div>
+                        <div class="cell" data-title="name">
+                            <span th:text="${project.name}"></span>
+                        </div>
+                        <div class="cell" data-title="start date">
+                            <span th:text="${project.startDate}"></span>
+                        </div>
+                        <div class="cell" data-title="end Date">
+                            <span th:text="${project.endDate}"></span>
+                        </div>
+                        <div class="cell" data-title="status">
+                            <span th:text="${project.status}"></span>
+                        </div>
+                    </div>
+                </div>
+                <nav aria-label="Pagination" th:if="${projectsPage.totalPages gt 0}">
+                    <ul class="pagination justify-content-center font-weight-medium">
+                        <li class="page-item" th:classappend="${projectsPage.number eq 0} ? 'disabled'">
+                            <a class="page-link"
+                               th:href="@{/projects?page={id}(id=${projectsPage.number lt 2 ? 1 : projectsPage.number})}"
+                               aria-label="Previous" title="Previous Page" data-toggle="tooltip">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <!--                    <li class="page-item" th:classappend="${i eq projectsPage.number + 1} ? 'active'"-->
+                        <!--                        th:each="i : ${#numbers.sequence( projectsPage.number + 1, projectsPage.totalPages > 10 + projectsPage.number ? projectsPage.number + 10 : projectsPage.totalPages, 1)}">-->
+                        <!--                        <a class="page-link" th:href="@{/projects?page={id}(id=${i})}" th:text="${i}"-->
+                        <!--                           th:title="${'Page '+ i}"-->
+                        <!--                           rel="tooltip"></a>-->
+                        <!--                    </li>-->
+                        <li class="page-item" th:classappend="${i eq projectsPage.number + 1} ? 'active'"
+                            th:each="i : ${#numbers.sequence( 1, projectsPage.totalPages,1)}">
+                            <a class="page-link" th:href="@{/projects?page={id}(id=${i})}" th:text="${i}"
+                               th:title="${'Page '+ i}"
+                               rel="tooltip"></a>
+                        </li>
+                        <li class="page-item disabled" th:if="${projectsPage.number + 10 < projectsPage.totalPages}">
+                            <a class="page-link svg-icon" href="#">
+                                <span aria-hidden="true">&hellip;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:classappend="${projectsPage.number + 1 eq projectsPage.totalPages} ? 'disabled'">
+                            <a class="page-link"
+                               th:href="@{/projects?page={id}(id=${projectsPage.number + 2})}"
+                               aria-label="Next" title="Next Page" data-toggle="tooltip">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <button sec:authorize="hasRole('ROLE_manager')" class="button button5 btn-primary" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span></button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container" >
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form" th:action="@{/projects}" method="post">
+                            <h2>Create Project</h2>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="name">Project Name:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="name" placeholder="Enter Project Name" name="name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="startDate">Start Date:</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" id="startDate" placeholder="Enter Start Date" name="startDate" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="endDate">End Date:</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" id="endDate" placeholder="Enter End Date" name="endDate" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="status">Status:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="status" placeholder="Enter Status" name="status" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="reset" class="btn btn-danger pull-left" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-success pull-right">Submit</button>
+                                </div>
+                            </div>
+
+                        </form> <!-- /form -->
+
+                    </div>
+                    <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancel</button>-->
+                    <!--<button type="submit" class="btn btn-success pull-right">Submit</button>-->
+                    <!--&lt;!&ndash;<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>&ndash;&gt;-->
+                    <!--</div>-->
+                </div>
+
+            </div>
+        </div>
+
+    </div> <!-- ./container -->
+
+</header>
+
+</body>
+</html>

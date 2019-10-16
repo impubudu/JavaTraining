@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Employee Management System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <style>
+        h1{
+            text-align: center;
+            margin: 30px;
+        }
+        .logout{
+            margin-right:15px;
+        }
+        .row .cell:nth-child(4) {
+            width: 194px;
+        }
+        .container {
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+        .panel-default>.panel-heading {
+             background-color: transparent;
+             border-color: transparent;
+        }
+        .emdetails{
+            margin-left: 56px;
+            font-size: 36px;
+        }
+        .h3, h3 {
+            font-size: 20px;
+        }
+        .empcontainer{
+        width:fit-content;
+        }
+         .details{
+        width:fit-content;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <ul class="nav navbar-nav navbar-left">
+        <button type="reset" class="btn btn-info pull-left" onclick="goBack()"><span class="glyphicon glyphicon-chevron-left "></span></button>
+    </ul>
+    <div class="navbar-header">
+        <a class="navbar-brand">EMS</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li><a th:href="@{/welcome}"> <i class="fa fa-home"></i> Home</a></li>
+        <li><a th:href="@{/employees}">Employees</a></li>
+        <li><a th:href="@{/projects}">Projects</a></li>
+        <li><a th:href="@{/tasks}">Tasks</a></li>
+        <li sec:authorize="hasRole('ROLE_manager')"><a th:href="@{/create-operation}">Operations</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li><a><span class="glyphicon glyphicon-user" sec:authentication="name"></span></a></li>
+        <li><form class="logout" th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </form></li>
+    </ul>
+
+</nav>
+<header>
+<div class="container empcontainer">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading"></div>
+            <div class="panel-body">
+                <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                    <img alt="User Pic" th:src="@{/img/user.png}" id="profile-image1" class="img-circle img-responsive">
+                </div>
+                <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8" >
+                    <div class="container empcontainer" >
+                        <h2 class="emdetails">Employee Details</h2>
+                    </div>
+                    <hr>
+                    <ul class="container details" >
+                        <li><h3><span  style="width:50px;">Id&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</span><span th:text="${employee.id}"></span></h3></li>
+                        <li><h3><span style="width:50px;">First Name&nbsp:</span><span th:text="${employee.firstName}"></span></h3></li>
+                        <li><h3><span style="width:50px;">Last Name : </span><span th:text="${employee.lastName}"></span></h3></li>
+                        <li><h3><span style="width:50px;">Email&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: </span><span th:text="${employee.email}"></span></h3></li>
+                        <li><h3><span style="width:50px;">Phone No&nbsp&nbsp  : </span><span th:text="${employee.phoneNumber}"></span></h3></li>
+                </div>
+            </div>
+        </div>
+            <h1>Projects Details</h1>
+            <div class="table">
+
+                <div class="row header thead">
+                    <div class="cell">
+                        ID
+                    </div>
+                    <div class="cell">
+                        Name
+                    </div>
+                    <div class="cell">
+                        Start Date
+                    </div>
+                    <div class="cell">
+                        End Date
+                    </div>
+                    <div class="cell">
+                        Status
+                    </div>
+                    <div class="cell">
+                        Tasks
+                    </div>
+                </div>
+
+                <div class="row" th:each="project:${projects}">
+                    <div class="cell" data-title="id">
+                        <span th:text="${project.id}"></span>
+                    </div>
+                    <div class="cell" data-title="name">
+                        <span th:text="${project.name}"></span>
+                    </div>
+                    <div class="cell" data-title="start date">
+                        <span th:text="${project.startDate}"></span>
+                    </div>
+                    <div class="cell" data-title="end Date">
+                        <span th:text="${project.endDate}"></span>
+                    </div>
+                    <div class="cell" data-title="status">
+                        <span th:text="${project.status}"></span>
+                    </div>
+                    <div class="cell" data-title="tasks">
+                        <a class="btn btn-primary" th:href="@{'/employees/' + ${employee.id}+'/projects/'+${project.id}+'/tasks'}" role="button" >View</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</header>
+
+</body>
+</html>

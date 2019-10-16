@@ -1,0 +1,10 @@
+com/example/emsui/model/Task.class
+com/example/emsui/model/AssignTask$ComposeKey.class
+com/example/emsui/model/AssignTaskList.class
+com/example/emsui/model/AssignTask.class
+com/example/emsui/model/Employee.class
+com/example/emsui/model/Project.class
+com/example/emsui/model/AssignedOperationList.class
+com/example/emsui/EmsUiApplication.class
+com/example/emsui/config/AccessTokenConfigurer.class
+com/example/emsui/controller/UIController.class

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Employee Management System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <style>
+        .disabled{
+            display:none !important;
+        }
+
+        .row .cell:nth-child(1) {
+            width: 267px;
+        }
+
+        .row .cell:nth-child(2) {
+            width: 211px;
+        }
+
+        .row .cell:nth-child(3) {
+            width: 179px;
+        }
+
+        .row .cell:nth-child(4) {
+            width: 129px;
+        }
+        .thead:hover{
+            background-color: #6c7ae0;
+        }
+        .logout{
+            margin-right:15px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <ul class="nav navbar-nav navbar-left">
+        <button type="reset" class="btn btn-info pull-left" onclick="goBack()"><span class="glyphicon glyphicon-chevron-left "></span></button>
+    </ul>
+    <div class="navbar-header">
+        <a class="navbar-brand">EMS</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li><a th:href="@{/welcome}"> <i class="fa fa-home"></i> Home</a></li>
+        <li><a th:href="@{/employees}">Employees</a></li>
+        <li><a th:href="@{/projects}">Projects</a></li>
+        <li><a th:href="@{/tasks}">Tasks</a></li>
+        <li sec:authorize="hasRole('ROLE_manager')"><a th:href="@{/create-operation}">Operations</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li sec:authorize="hasRole('ROLE_manager')"><a th:href="@{/create-project}">Create</a></li>
+        <li><a><span class="glyphicon glyphicon-user" sec:authentication="name"></span></a></li>
+        <li><form class="logout" th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </form></li>
+    </ul>
+
+</nav>
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table">
+
+                <div class="row header thead">
+                    <div class="cell">
+                        ID
+                    </div>
+                    <div class="cell">
+                        Name
+                    </div>
+                    <div class="cell">
+                        Start Date
+                    </div>
+                    <div class="cell">
+                        End Date
+                    </div>
+                    <div class="cell">
+                        Status
+                    </div>
+                </div>
+
+                <div class="row" th:each="project:${projects}">
+                    <div class="cell" data-title="id">
+                        <span th:text="${project.id}"></span>
+                    </div>
+                    <div class="cell" data-title="name">
+                        <span th:text="${project.name}"></span>
+                    </div>
+                    <div class="cell" data-title="start date">
+                        <span th:text="${project.startDate}"></span>
+                    </div>
+                    <div class="cell" data-title="end Date">
+                        <span th:text="${project.endDate}"></span>
+                    </div>
+                    <div class="cell" data-title="status">
+                        <span th:text="${project.status}"></span>
+                    </div>
+                </div>
+            </div>
+            <nav aria-label="Pagination" th:if="${projectsPage.totalPages gt 0}">
+                <ul class="pagination justify-content-center font-weight-medium">
+                    <li class="page-item" th:classappend="${projectsPage.number eq 0} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/projects?page={id}(id=${projectsPage.number lt 2 ? 1 : projectsPage.number})}"
+                           aria-label="Previous" title="Previous Page" data-toggle="tooltip">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+<!--                    <li class="page-item" th:classappend="${i eq projectsPage.number + 1} ? 'active'"-->
+<!--                        th:each="i : ${#numbers.sequence( projectsPage.number + 1, projectsPage.totalPages > 10 + projectsPage.number ? projectsPage.number + 10 : projectsPage.totalPages, 1)}">-->
+<!--                        <a class="page-link" th:href="@{/projects?page={id}(id=${i})}" th:text="${i}"-->
+<!--                           th:title="${'Page '+ i}"-->
+<!--                           rel="tooltip"></a>-->
+<!--                    </li>-->
+                    <li class="page-item" th:classappend="${i eq projectsPage.number + 1} ? 'active'"
+                        th:each="i : ${#numbers.sequence( 1, projectsPage.totalPages,1)}">
+                        <a class="page-link" th:href="@{/projects?page={id}(id=${i})}" th:text="${i}"
+                           th:title="${'Page '+ i}"
+                           rel="tooltip"></a>
+                    </li>
+                    <li class="page-item disabled" th:if="${projectsPage.number + 10 < projectsPage.totalPages}">
+                        <a class="page-link svg-icon" href="#">
+                            <span aria-hidden="true">&hellip;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" th:classappend="${projectsPage.number + 1 eq projectsPage.totalPages} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/projects?page={id}(id=${projectsPage.number + 2})}"
+                           aria-label="Next" title="Next Page" data-toggle="tooltip">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</body>
+</html>
