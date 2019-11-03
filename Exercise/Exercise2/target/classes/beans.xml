@@ -1,0 +1,49 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context = "http://www.springframework.org/schema/context"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <bean id="department" class="com.impubudu.setterInjection.Department">
+        <property name="employee" ref="employee" />
+    </bean>
+
+    <bean id = "company" class = "com.impubudu.constructorInjection.Company">
+        <constructor-arg ref = "manager"/>
+    </bean>
+
+    <bean id="employee"
+          class="com.impubudu.setterInjection.Employee">
+    </bean>
+
+    <bean id="manager"
+          class="com.impubudu.constructorInjection.Manager">
+    </bean>
+
+    <bean id = "carStation" class = "com.impubudu.autowired.CarStation">
+    </bean>
+
+    <bean id = "car" class = "com.impubudu.autowired.Car">
+    </bean>
+
+    <bean id = "school" class = "com.impubudu.qualifier.School">
+    </bean>
+
+    <bean id = "student1" class = "com.impubudu.qualifier.Student">
+        <property name = "name" value = "Pubudu" />
+        <property name = "age" value = "25"/>
+    </bean>
+
+    <!-- Definition for student2 bean -->
+    <bean id = "student2" class = "com.impubudu.qualifier.Student">
+        <property name = "name" value = "Prasanna" />
+        <property name = "age" value = "30"/>
+    </bean>
+
+</beans>
