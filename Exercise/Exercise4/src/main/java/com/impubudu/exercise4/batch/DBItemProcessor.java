@@ -14,13 +14,25 @@ public class DBItemProcessor implements ItemProcessor<Employee,Employee> {
 
     JobExecution jobExecution;
 
+    private String threadName;
+
     @Override
     public Employee process(Employee employee) throws Exception {
         employee.setFirstName("Dr."+employee.getFirstName());
         Integer count = jobExecution.getExecutionContext().getInt("count");
         count++;
         jobExecution.getExecutionContext().putInt("count",count);
+        System.out.println(threadName + " processing : "
+                + employee.getId());
         return employee;
+    }
+
+    public String getThreadName() {
+        return threadName;
+    }
+
+    public void setThreadName(String threadName) {
+        this.threadName = threadName;
     }
 
     @BeforeStep

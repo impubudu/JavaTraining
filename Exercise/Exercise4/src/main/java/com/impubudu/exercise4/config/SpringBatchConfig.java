@@ -40,7 +40,7 @@ public class SpringBatchConfig {
     ) {
 
         Step step1 = stepBuilderFactory.get("step1")
-                .<Employee, Employee>chunk(100)
+                .<Employee, Employee>partitioner("step1", new RangePartitioner())
                 .reader(itemReader)
                 .processor(itemProcessor)
                 .writer(itemWriter)
@@ -53,32 +53,33 @@ public class SpringBatchConfig {
                 .faultTolerant()
                 .skipPolicy(new NullPointerExceptionSkipper())
                 .build();
-        Step step2 = stepBuilderFactory.get("step1")
-                .<Employee, Employee>chunk(100)
-                .reader(itemReader)
-                .processor(itemProcessor)
-                .writer(itemWriter)
-//                .listener(new StepItemReadListener())
-//                .listener(new StepItemProcessListener())
-//                .listener(new StepItemWriteListener())
-//                .listener(new StepResultListener())
-//                .listener(new StepSkipListener())
-//                .listener(new CustomChunkListener())
-                .faultTolerant()
-                .skipPolicy(new NullPointerExceptionSkipper())
-                .build();
-
-        Step step3 = stepBuilderFactory.get("step3")
-                .tasklet(reportTasklet())
-                .build();
+//        Step step2 = stepBuilderFactory.get("step1")
+//                .<Employee, Employee>chunk(100)
+//                .reader(itemReader)
+//                .processor(itemProcessor)
+//                .writer(itemWriter)
+////                .listener(new StepItemReadListener())
+////                .listener(new StepItemProcessListener())
+////                .listener(new StepItemWriteListener())
+////                .listener(new StepResultListener())
+////                .listener(new StepSkipListener())
+////                .listener(new CustomChunkListener())
+//                .faultTolerant()
+//                .skipPolicy(new NullPointerExceptionSkipper())
+//                .build();
+//
+//        Step step3 = stepBuilderFactory.get("step3")
+//                .tasklet(reportTasklet())
+//                .build();
 
         return jobBuilderFactory.get("DB-Read")
                 .incrementer(new RunIdIncrementer())
                 .listener(new JobResultListener())
-                .flow(step1)
-                .next(step2)
-                .next(step3)
-                .end()
+                .start(step1)
+//                .flow(step1)
+//                .next(step2)
+//                .next(step3)
+//                .end()
                 .build();
     }
 
