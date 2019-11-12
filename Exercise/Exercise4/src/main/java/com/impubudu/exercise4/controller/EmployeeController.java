@@ -27,6 +27,8 @@ public class EmployeeController {
 
         Map<String, JobParameter> maps = new HashMap<>();
         maps.put("time", new JobParameter(System.currentTimeMillis()));
+        maps.put("table", new JobParameter("employee"));
+        //maps.put("table", new JobParameter(""));
         JobParameters parameters = new JobParameters(maps);
         JobExecution jobExecution = jobLauncher.run(job, parameters);
 
@@ -38,37 +40,6 @@ public class EmployeeController {
         }
 
         return jobExecution.getStatus();
-    }
-
-    public static int[] result(int[] array){
-        int k = 1;
-        int[] result = new int[array.length];
-        for (int i=0;i<array.length;i++){
-            if (k == 0) {
-                int j = 0;
-                while (i - j - 1 >= 0) {
-                    if (array[i - j] < array[i - j - 1]) {
-                        result[i - j - 1] += 1;
-                    } else {
-                        break;
-                    }
-                    j += 1;
-                }
-                k = 1;
-            }
-            result[i]=k;
-            if (i+1 < array.length && array[i] < array[i+1]){
-                k += 1;
-            }
-            else{
-                if (k > 1){
-                    k = 1;
-                }else{
-                    k = 0;
-                }
-            }
-        }
-        return result;
     }
 }
 

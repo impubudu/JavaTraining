@@ -1,0 +1,11 @@
+firstName,lastName,age,address,salary,maritalStatus,departmentId
+Pubudu,Prasanna,25,Tangalle,20000.0,false,1
+Nimal,Perera,45,Colombo,120000.0,true,2
+Gayan,Nuwan,28,Colombo,220000.0,false,2
+Kasun,Rajitha,32,Hambanthota,20000.0,false,1
+Nuwan,Madhushanka,24,Negambo,20000.0,true,3
+Charith,Rasika,24,Mathara,200000.0,false,4
+Nipun,Thilakshan,44,Mathara,200000.0,false,4
+Lalith,Bhanuka,34,Badulla,500000.0,true,2
+Nimantha,Piumal,30,Galle,100000.0,false,5
+Saman,Nilanka,55,Galle,50000.0,true,1

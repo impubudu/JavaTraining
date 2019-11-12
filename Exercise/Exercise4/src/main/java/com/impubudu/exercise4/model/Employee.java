@@ -1,35 +1,13 @@
 package com.impubudu.exercise4.model;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
-@SqlResultSetMapping(
-        name = "EmployeeMapping",
-        entities = {
-                @EntityResult(
-                        entityClass = Employee.class,
-                        fields = {
-                                @FieldResult(name = "id", column = "id"),
-                                @FieldResult(name = "firstName", column = "first_name"),
-                                @FieldResult(name = "lastName", column = "last_name"),
-                                @FieldResult(name = "birthDay", column = "birthDay"),
-                                @FieldResult(name = "age", column = "age"),
-                                @FieldResult(name = "address", column = "address"),
-                                @FieldResult(name = "salary", column = "salary"),
-                                @FieldResult(name = "maritalStatus", column = "maritalStatus"),
-                                @FieldResult(name = "departmentId", column = "department_id"),
-                                @FieldResult(name = "createdDate", column = "created_date")}),
-                })
-
-//@EntityResult(
-//        entityClass = Department.class,
-//        fields = {
-//                @FieldResult(name = "id", column = "deptId"),
-//                @FieldResult(name = "name", column = "deptName")})
 public class Employee {
 
     @Id
@@ -40,6 +18,7 @@ public class Employee {
 
     private String lastName;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDay;
 
     private int age;
@@ -52,12 +31,6 @@ public class Employee {
 
     @CreationTimestamp
     private Timestamp createdDate;
-
-//    @ManyToOne
-//    @JoinColumn
-//    private Department department;
-
-    private int departmentId;
 
     public Integer getId() {
         return id;
@@ -129,23 +102,6 @@ public class Employee {
 
     public void setCreatedDate(Timestamp createdDate) {
         this.createdDate = createdDate;
-    }
-
-//    public Department getDepartment() {
-//        return department;
-//    }
-//
-//    public void setDepartment(Department department) {
-//        this.department = department;
-//    }
-
-
-    public int getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(int departmentId) {
-        this.departmentId = departmentId;
     }
 
     @Override
