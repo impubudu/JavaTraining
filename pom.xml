@@ -25,14 +25,18 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>deadlock</artifactId>
+    <artifactId>threadleak</artifactId>
     <packaging>jar</packaging>
-    <name>deadlock</name>
+    <name>threadleak</name>
 
     <dependencies>
         <dependency>
             <groupId>com.github.chrishantha.sample</groupId>
             <artifactId>base</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hdrhistogram</groupId>
+            <artifactId>HdrHistogram</artifactId>
         </dependency>
     </dependencies>
 

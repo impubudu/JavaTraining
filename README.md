@@ -1,45 +1,31 @@
-Sample to show deadlocks in a Java Application
-==============================================
+Sample to show thread leaks in a Java Application
+=================================================
 
-This sample application shows an example of a deadlock. Following is the definition of "deadlock" according to
-[Java Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/deadlock.html)
+This sample application implements merge sort algorithm using multiple threads.
 
-> Deadlock describes a situation where two or more threads are blocked forever, waiting for each other.
+The algorithm for parallel merge sort was taken from the [Merge Sort example available online from the University
+of Washington](https://courses.cs.washington.edu/courses/cse373/13wi/lectures/03-13/MergeSort.java)
 
-In this application, there are two threads trying to acquire two locks.
+The original example uses threads directly. This sample application uses an `ExecutorService` to run threads.
+
+This application runs continuously and prints an interval summary statistics of algorithm run time for multiple random
+number arrays. The application will also print final summary statistics of algorithm run time at the program exit.
 
 ### How to run
 
-The application will throw Out of Memory error after some time when you run the application with default parameters.
+The application will throw Out of Memory error after some time when you run following command
 
-`java -Xms1g -Xmx1g -jar target/deadlock.jar`
+`java -Xmx1g -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints
+ -XX:+UnlockCommercialFeatures -XX:+FlightRecorder
+ -XX:StartFlightRecording=settings=profile,duration=2m,name=ThreadLeak,filename=threadleak.jfr
+ -XX:FlightRecorderOptions=loglevel=info
+ -jar target/threadleak.jar`
 
-### How to detect a deadlock
+### Analyzing Java Flight Recording
 
-Take a thread dump (using `jstack <pid>` command or `jcmd <pid> Thread.print`).
+In Threads -> Overview tab, you should see thread count is increasing steadily.
 
-The thread dump should show the Java level deadlock details as follows.
+### How to fix the Thread Leak
 
-```
-Found one Java-level deadlock:
-=============================
-"Thread Group  1-2":
-  waiting to lock monitor 0x00007f8ab4003a78 (object 0x00000000eaca1488, a java.lang.Object),
-  which is held by "Thread Group  1-1"
-"Thread Group  1-1":
-  waiting to lock monitor 0x00007f8ab4006518 (object 0x00000000eaca1498, a java.lang.Object),
-  which is held by "Thread Group  1-2"
-
-Java stack information for the threads listed above:
-===================================================
-"Thread Group  1-2":
-        at com.github.chrishantha.sample.deadlock.DeadlockApplication$SampleLockThread.run(DeadlockApplication.java:54)
-        - waiting to lock <0x00000000eaca1488> (a java.lang.Object)
-        - locked <0x00000000eaca1498> (a java.lang.Object)
-"Thread Group  1-1":
-        at com.github.chrishantha.sample.deadlock.DeadlockApplication$SampleLockThread.run(DeadlockApplication.java:54)
-        - waiting to lock <0x00000000eaca1498> (a java.lang.Object)
-        - locked <0x00000000eaca1488> (a java.lang.Object)
-
-Found 1 deadlock.
-```
+Run the application with `--stop-leakage` parameter, which will use a single `ExecutorService` throughout the
+application.
